@@ -1,0 +1,14 @@
+Resources:
+  adminTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: admin-${env:APP_NAME}-${opt:stage}
+      AttributeDefinitions:
+        - AttributeName: userSub
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userSub
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true

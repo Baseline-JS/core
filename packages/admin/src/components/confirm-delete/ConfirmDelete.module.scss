@@ -1,0 +1,19 @@
+.confirmDelete {
+  display: flex;
+  align-items: center;
+}
+
+.deleteModal,
+.confirmDelete {
+  .deleteButton {
+    display: flex;
+    align-items: center;
+    font: normal normal normal 15px/22px 'Montserrat', sans-serif;
+    background: unset;
+    border: unset;
+
+    &:disabled {
+      opacity: 0.25;
+    }
+  }
+}

@@ -1,0 +1,175 @@
+service: ${env:APP_NAME}-admin
+
+frameworkVersion: '>=2.0.0 <4.0.0'
+
+plugins:
+  - serverless-s3-sync
+  - serverless-cloudfront-invalidate
+
+custom:
+  s3Sync:
+    - bucketNameKey: S3Bucket
+      localDir: .dist/
+  cloudfrontInvalidate:
+    - distributionIdKey: 'CDNDistributionId'
+      items:
+        - '/*'
+
+provider:
+  stackName: ${self:service}-${sls:stage} # Overwrite default CloudFormation stack name. Default is ${self:service}-${sls:stage}
+  name: aws
+  runtime: nodejs16.x
+  profile: ${env:AWS_PROFILE}
+  region: ${opt:region}
+  stage: ${opt:stage}
+  deploymentMethod: direct
+  deploymentPrefix: ${self:service}-${sls:stage}
+  stackTags:
+    AppName: ${env:APP_NAME}
+    Stage: ${opt:stage}
+    Region: ${opt:region}
+    Product: Baseline
+    LicenseId: ${env:LICENSE_ID}
+
+# The "Resources" your "Functions" use.  Raw AWS CloudFormation goes in here.
+resources:
+  Description: ${env:APP_NAME} ${opt:stage}
+  Resources:
+    ## Specifying the S3 Bucket
+    WebsiteS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        OwnershipControls:
+          Rules:
+            - ObjectOwnership: BucketOwnerPreferred
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+          BlockPublicPolicy: false
+          IgnorePublicAcls: false
+          RestrictPublicBuckets: false
+    ## Specifying the policies to make sure all files inside the Bucket are available to CloudFront
+    WebsiteS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: WebsiteS3Bucket
+        PolicyDocument:
+          Statement:
+            - Sid: PublicReadGetObject
+              Effect: Allow
+              Principal:
+                Service: cloudfront.amazonaws.com
+              Action:
+                - s3:GetObject
+              Resource: !Join
+                - ''
+                - - 'arn:aws:s3:::'
+                  - !Ref WebsiteS3Bucket
+                  - /*
+              Condition:
+                StringEquals:
+                  AWS:SourceArn:
+                    !Join [
+                      '',
+                      [
+                        'arn:aws:cloudfront::',
+                        !Ref AWS::AccountId,
+                        ':distribution/',
+                        !Ref WebsiteCloudFrontDistribution,
+                      ],
+                    ]
+    CloudfrontResponsePolicy:
+      Type: AWS::CloudFront::ResponseHeadersPolicy
+      Properties:
+        ResponseHeadersPolicyConfig:
+          Name: ${self:service}-${sls:stage}-no-cache-headers
+          CustomHeadersConfig:
+            Items:
+              - Header: 'Cache-Control'
+                Override: true
+                Value: 'no-cache'
+    # OAC Role for the Cloudfront distribution to block direct S3 Access
+    WebsiteCloudFrontDistributionOriginAccessControl:
+      Type: AWS::CloudFront::OriginAccessControl
+      Properties:
+        OriginAccessControlConfig:
+          Name: ${self:service}-${sls:stage}-cloudfront-oac
+          OriginAccessControlOriginType: s3
+          SigningBehavior: always
+          SigningProtocol: sigv4
+    ## Specifying the CloudFront Distribution to serve your Web Application
+    WebsiteCloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          HttpVersion: http2
+          Origins:
+            - DomainName: !GetAtt WebsiteS3Bucket.RegionalDomainName
+              ## An identifier for the origin which must be unique within the distribution
+              Id: !GetAtt WebsiteS3Bucket.RegionalDomainName
+              OriginAccessControlId: !Ref WebsiteCloudFrontDistributionOriginAccessControl
+              S3OriginConfig:
+                OriginAccessIdentity: ''
+          Enabled: true
+          ## [Custom Domain] Add the domain alias
+          # Aliases:
+          # - mysite.example.com
+          DefaultRootObject: 'index.html'
+          ## Since the Single Page App is taking care of the routing we need to make sure ever path is served with index.html
+          ## The only exception are files that actually exist e.h. app.js, reset.css
+          CustomErrorResponses:
+            - ErrorCode: 403
+              ResponseCode: 200
+              ResponsePagePath: '/index.html'
+          DefaultCacheBehavior:
+            AllowedMethods:
+              - GET
+              - HEAD
+            CachedMethods:
+              - HEAD
+              - GET
+            Compress: true
+            DefaultTTL: 1800
+            MinTTL: 0
+            ## The origin id defined above
+            TargetOriginId: !GetAtt WebsiteS3Bucket.RegionalDomainName
+            ## Defining if and how the QueryString and Cookies are forwarded to the origin which in this case is S3
+            ForwardedValues:
+              QueryString: false
+              Cookies:
+                Forward: none
+            ## The protocol that users can use to access the files in the origin. To allow HTTP use `allow-all`
+            ViewerProtocolPolicy: redirect-to-https
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+            ResponseHeadersPolicyId: !Ref CloudfrontResponsePolicy
+          ## The certificate to use when viewers use HTTPS to request objects.
+          ViewerCertificate:
+            CloudFrontDefaultCertificate: true
+            ## [Custom Domain] Stop using the cloudfront default certificate, uncomment below and add ACM Certificate ARN
+            # CloudFrontDefaultCertificate: false
+            # ACMCertificateArn: "" # ARN of the AWS certificate
+            # MinimumProtocolVersion: "TLSv1.2_2021"
+          ## Uncomment the following section in case you want to enable logging for CloudFront requests
+          # Logging:
+          #   IncludeCookies: 'false'
+          #   Bucket: mylogs.s3.amazonaws.com
+          #   Prefix: myprefix
+
+  ## In order to print out the hosted domain via `serverless info` we need to define the DomainName output for CloudFormation
+  Outputs:
+    AdminCloudFrontUrl:
+      Description: The Admin URL
+      Value:
+        'Fn::GetAtt': [WebsiteCloudFrontDistribution, DomainName]
+    AdminCloudFrontDistributionId:
+      Description: CloudFront Distribution Id
+      Value:
+        Ref: WebsiteCloudFrontDistribution
+    CDNDistributionId:
+      Description: CloudFront Distribution Id for serverless-cloudfront-invalidate
+      Value:
+        Ref: WebsiteCloudFrontDistribution
+    S3Bucket:
+      Description: S3 Bucket
+      Value:
+        Ref: WebsiteS3Bucket

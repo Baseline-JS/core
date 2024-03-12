@@ -1,0 +1,14 @@
+{
+  "name": "@baseline/add-object",
+  "version": "1.0.0",
+  "main": "add-object.js",
+  "scripts": {
+    "start": "./add-object.js",
+    "lint": "echo 'No linting'",
+    "pretty": "npx prettier --write '*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}'"
+  },
+  "devDependencies": {
+    "readline-sync": "1.4.10",
+    "js-yaml": "4.1.0"
+  }
+}

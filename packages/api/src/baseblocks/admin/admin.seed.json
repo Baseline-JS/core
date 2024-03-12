@@ -1,0 +1,14 @@
+[
+  {
+    "userSub": "ed805890-d66b-4126-a5d9-0b22e70fce80",
+    "userEmail": "example@devika.com"
+  },
+  {
+    "userSub": "ed805890-d66b-4126-a5d9-0b22e70fce81",
+    "userEmail": "example+1@devika.com"
+  },
+  {
+    "userSub": "ed805890-d66b-4126-a5d9-0b22e70fce82",
+    "userEmail": "example+2@devika.com"
+  }
+]

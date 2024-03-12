@@ -1,0 +1,151 @@
+@use '../../styles/global';
+
+$animationSpeed: 150ms;
+$collapseAt: global.$md;
+$navHeight: 64px;
+$navPadding: 24px 128px;
+$mobileNavHeight: 32px;
+$mobileNavPadding: 24px 48px;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: $navPadding;
+  background: #fff;
+  box-shadow: 0 3px 6px #00000029;
+
+  @media screen and (max-width: $collapseAt) {
+    flex-direction: column;
+    padding: $mobileNavPadding;
+  }
+
+  .toggler {
+    flex: 0 0 auto;
+
+    @media screen and (max-width: $collapseAt) {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .logo {
+      margin-right: 96px;
+
+      img {
+        width: 100%;
+        height: $navHeight;
+        object-fit: contain;
+      }
+
+      @media screen and (max-width: $collapseAt) {
+        margin-right: unset;
+
+        img {
+          height: $mobileNavHeight;
+        }
+      }
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-evenly;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+
+      @media screen and (max-width: $collapseAt) {
+        display: flex;
+      }
+
+      .line {
+        height: 5px;
+        background: #000;
+      }
+    }
+  }
+
+  .links {
+    display: flex;
+    flex: 1 1 auto;
+
+    .left,
+    .right {
+      flex: 1 1 50%;
+    }
+
+    .right {
+      text-align: right;
+    }
+
+    a {
+      @include global.mediumFont(normal, 600);
+
+      margin: 12px;
+      color: #000;
+      text-decoration: none;
+      border-bottom: #fff 1px solid;
+      transition: border-bottom-color $animationSpeed ease-in-out;
+
+      &:hover {
+        border-bottom: #505050 1px solid;
+      }
+
+      /* Only apply on desktop */
+      @media screen and (min-width: $collapseAt) {
+        &:first-of-type {
+          margin-left: unset;
+        }
+
+        &:last-of-type {
+          margin-right: unset;
+        }
+      }
+
+      &.button {
+        padding: 12px 64px;
+        color: #000;
+        border: 2px solid #bababa;
+        border-radius: 26px;
+        transition: color $animationSpeed ease-in-out,
+          background $animationSpeed ease-in-out;
+
+        &:hover {
+          color: #fff;
+          background: #bababa;
+        }
+      }
+    }
+
+    &.mobile {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 16px 0;
+    }
+
+    @media screen and (max-width: $collapseAt) {
+      display: none;
+
+      &.mobile {
+        display: flex;
+      }
+    }
+  }
+}
+
+/** Since the nav is fixed, a spacer is required to push content away */
+.spacer {
+  min-height: $navHeight;
+  margin: $navPadding;
+
+  @media screen and (max-width: $collapseAt) {
+    min-height: $mobileNavHeight;
+    margin: $mobileNavPadding;
+  }
+}

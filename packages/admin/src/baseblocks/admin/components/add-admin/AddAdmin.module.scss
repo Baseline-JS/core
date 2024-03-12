@@ -1,0 +1,12 @@
+@use '../../../../styles/global';
+
+.addUser,
+.addUserModal {
+  .addUserButton {
+    @include global.smallFont();
+
+    padding: 6px 12px;
+    background: unset;
+    border: 1px solid #bababa;
+  }
+}

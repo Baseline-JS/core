@@ -1,0 +1,14 @@
+Resources:
+  {{ nameCamel }}Table:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: {{ nameKebab }}-${env:APP_NAME}-${opt:stage}
+      AttributeDefinitions:
+        - AttributeName: {{ primaryKey }}
+          AttributeType: S
+      KeySchema:
+        - AttributeName: {{ primaryKey }}
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification: 
+        PointInTimeRecoveryEnabled: true

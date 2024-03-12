@@ -1,0 +1,55 @@
+@use '../../styles/global';
+
+$animationSpeed: 150ms;
+$collapseAt: global.$xl;
+
+.aboutBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 280px 96px;
+
+  @media screen and (max-width: $collapseAt) {
+    flex-direction: column-reverse;
+    padding: 32px 16px;
+  }
+
+  .content {
+    flex: 1 1 auto;
+    max-width: 550px;
+
+    @media screen and (max-width: $collapseAt) {
+      max-width: unset;
+    }
+
+    h1 {
+      @include global.hugeFont(normal, bold);
+    }
+
+    p {
+      @include global.mediumFont();
+    }
+
+    a {
+      @include global.genericButton();
+    }
+  }
+
+  .image {
+    flex: 0 1 auto;
+    width: 500px;
+    height: 480px;
+    margin: 16px;
+
+    @media screen and (max-width: $collapseAt) {
+      width: 100%;
+      margin-bottom: 32px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

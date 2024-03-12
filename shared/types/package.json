@@ -1,0 +1,10 @@
+{
+  "name": "@baseline/types",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "lint": "echo 'No linting'",
+    "pretty": "npx prettier --write '*.{ts,tsx,d.ts,js,json,css,scss,md,yml,yaml,html}'"
+  },
+  "dependencies": {}
+}

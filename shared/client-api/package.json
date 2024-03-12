@@ -1,0 +1,13 @@
+{
+  "name": "@baseline/client-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "lint": "echo 'No linting'",
+    "pretty": "npx prettier --write '*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}'"
+  },
+  "dependencies": {
+    "@baseline/types": "1.0.0",
+    "axios": "0.26.1"
+  }
+}

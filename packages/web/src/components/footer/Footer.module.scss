@@ -1,0 +1,52 @@
+@use '../../styles/global';
+
+$animationSpeed: 150ms;
+$collapseAt: global.$xl;
+
+.footer {
+  display: flex;
+  padding: 128px;
+  color: #fff;
+  background: #3a3838;
+
+  .column {
+    flex: 1 1 33%;
+
+    img {
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .links {
+      margin-top: 32px;
+
+      a {
+        @include global.mediumFont(normal, 600);
+
+        margin-right: 42px;
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .address {
+      @include global.mediumFont(normal, 400);
+
+      margin-top: 32px;
+    }
+
+    @media screen and (max-width: $collapseAt) {
+      flex: 1 1 auto;
+      margin-bottom: 16px;
+    }
+  }
+
+  @media screen and (max-width: $collapseAt) {
+    flex-direction: column;
+    padding: 32px 16px;
+  }
+}

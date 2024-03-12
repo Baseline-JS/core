@@ -1,0 +1,69 @@
+@use '../../../../styles/global';
+
+.userList {
+  .admin,
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 0;
+    padding: 18px 48px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #bababa;
+
+    @media screen and (max-width: global.$lg) {
+      padding: 12px;
+    }
+
+    &:not(:last-of-type) {
+      border-bottom: unset;
+    }
+
+    .userCount {
+      @include global.smallFont();
+      margin-right: 8px;
+    }
+
+    .info {
+      flex: 1 1 auto;
+      min-width: 0;
+
+      .details {
+        margin-bottom: 8px;
+
+        .name,
+        .data {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .name {
+          @include global.largeFont();
+          margin-bottom: 8px;
+          font-weight: bold;
+        }
+
+        .data {
+          @include global.mediumFont();
+          color: #707070;
+        }
+      }
+
+      .pill {
+        @include global.smallFont();
+        width: min-content;
+        padding: 6px 18px;
+        border: 1px solid #bababa;
+        border-radius: 10px;
+      }
+    }
+
+    .buttons {
+      flex: 0 0 auto;
+      min-width: min-content;
+    }
+  }
+}

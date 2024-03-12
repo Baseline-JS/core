@@ -1,0 +1,67 @@
+{
+  "name": "@baseline/web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "deploy:staging": "./scripts/deploy.sh staging",
+    "remove:staging": ". ../../scripts/project-variables.sh && export LICENSE_ID=remove && npx serverless remove --stage staging --region $REGION",
+    "deploy:prod": "./scripts/deploy.sh prod",
+    "remove:prod": ". ../../scripts/project-variables.sh && export LICENSE_ID=remove && npx serverless remove --stage prod --region $REGION",
+    "aws:profile": "../../scripts/setup-aws-profile.sh",
+    "start": "npx vite",
+    "build": "pnpm run generate:env:staging && npx vite build",
+    "build:deploy": "npx vite build",
+    "preview": "npx vite preview",
+    "generate:env:local": "pnpm -w run generate:env:local",
+    "generate:env:staging": "pnpm -w run generate:env:staging",
+    "generate:env:prod": "pnpm -w run generate:env:prod",
+    "lint": "npx stylelint --config '.stylelintrc.json' 'src/**/*.scss' && npx eslint --config '.eslintrc.js' 'src/**/*.{ts,tsx,js}'",
+    "pretty": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}'"
+  },
+  "dependencies": {
+    "@baseline/client-api": "1.0.0",
+    "@baseline/types": "1.0.0",
+    "@vitejs/plugin-react": "4.0.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-helmet": "6.1.0",
+    "react-router-dom": "6.3.0",
+    "reactstrap": "9.0.1",
+    "typescript": "4.6.4",
+    "vite": "4.3.3",
+    "vite-plugin-environment": "1.1.3"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "18.0.6",
+    "@types/react-helmet": "6.1.5",
+    "eslint-plugin-react": "7.31.1",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "postcss": "8.3.11",
+    "postcss-scss": "4.0.2",
+    "prettier": "2.4.1",
+    "sass": "1.43.4",
+    "serverless": "3.30.1",
+    "serverless-cloudfront-invalidate": "1.12.2",
+    "serverless-s3-sync": "3.1.0",
+    "stylelint": "13.13.1",
+    "stylelint-config-css-modules": "2.3.0",
+    "stylelint-config-rational-order": "0.1.2",
+    "stylelint-config-sass-guidelines": "9.0.1",
+    "stylelint-config-standard": "24.0.0",
+    "stylelint-config-standard-scss": "3.0.0",
+    "stylelint-order": "5.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
