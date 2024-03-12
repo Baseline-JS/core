@@ -55,7 +55,6 @@ provider:
     Stage: ${opt:stage}
     Region: ${opt:region}
     Product: Baseline
-    LicenseId: ${env:LICENSE_ID}
   timeout: 30
   architecture: arm64
   memorySize: 2048
