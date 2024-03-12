@@ -7,13 +7,16 @@ import {
   getAll,
   putItem,
   update,
-} from '../baseblocks/dynamodb/dynamodb';
-import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+  dynamoDb,
+} from 'baseline-dynamodb';
 import { randomUUID } from 'crypto';
 
-export class ServiceObject<T> {
+type DynamoDbDocumentClient = typeof dynamoDb;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export class ServiceObject<T extends Record<string, any>> {
   table: string;
-  dynamoDb: DocumentClient;
+  dynamoDb: DynamoDbDocumentClient;
   objectName: string;
   primaryKey: string;
   ownerField: string | undefined;
@@ -21,7 +24,7 @@ export class ServiceObject<T> {
   constructor(params: {
     table: string;
     objectName: string;
-    dynamoDb: DocumentClient;
+    dynamoDb: DynamoDbDocumentClient;
     primaryKey: string;
     ownerField?: string;
   }) {
@@ -35,6 +38,9 @@ export class ServiceObject<T> {
   async getAll(): Promise<T[]> {
     console.log(`Get all ${this.objectName} records`);
     try {
+      if (!this.dynamoDb) {
+        throw new Error('DynamoDB not connected');
+      }
       return getAll<T>({
         dynamoDb: this.dynamoDb,
         table: this.table,
@@ -49,6 +55,9 @@ export class ServiceObject<T> {
   async get(key: string): Promise<T> {
     console.log(`Get ${this.objectName} by ${this.primaryKey} [${key}]`);
     try {
+      if (!this.dynamoDb) {
+        throw new Error('DynamoDB not connected');
+      }
       return await get<T>({
         dynamoDb: this.dynamoDb,
         table: this.table,
@@ -66,6 +75,9 @@ export class ServiceObject<T> {
   async create(record: Partial<T>): Promise<T> {
     console.log(`Create ${this.objectName}`);
     try {
+      if (!this.dynamoDb) {
+        throw new Error('DynamoDB not connected');
+      }
       const item: Partial<T> = {
         [this.primaryKey]: randomUUID(),
         ...record,
@@ -89,13 +101,16 @@ export class ServiceObject<T> {
       }]`,
     );
     try {
+      if (!this.dynamoDb) {
+        throw new Error('DynamoDB not connected');
+      }
       if (!record[this.primaryKey]) {
         throw new Error(`Cannot update without ${this.primaryKey}`);
       }
       const partial = {} as Partial<T>;
-      Object.keys(record).forEach((key) => {
+      Object.keys(record).forEach((key: keyof T) => {
         if (key !== this.primaryKey) {
-          partial[key] = record[key as keyof T];
+          partial[key] = record[key];
         }
       });
       return await update<T>({
@@ -113,14 +128,17 @@ export class ServiceObject<T> {
     }
   }
 
-  async delete(key: string): Promise<boolean> {
-    console.log(`Delete ${this.objectName} ${key}`);
+  async delete(keyValue: string): Promise<boolean> {
+    console.log(`Delete ${this.objectName} ${keyValue}`);
     try {
+      if (!this.dynamoDb) {
+        throw new Error('DynamoDB not connected');
+      }
       return await deleteItem({
         dynamoDb: this.dynamoDb,
         table: this.table,
         keyName: this.primaryKey,
-        keyValue: key,
+        keyValue: keyValue,
       });
     } catch (error) {
       const message = getErrorMessage(error);
@@ -132,6 +150,9 @@ export class ServiceObject<T> {
   async batchGet(ids: string[]): Promise<T[]> {
     console.log(`Getting all ${this.objectName} by ids`);
     try {
+      if (!this.dynamoDb) {
+        throw new Error('DynamoDB not connected');
+      }
       return await batchGet<T>({
         dynamoDb: this.dynamoDb,
         keyName: this.primaryKey,

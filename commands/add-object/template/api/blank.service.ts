@@ -1,5 +1,5 @@
 import { {{ nameFirst }} } from '@baseline/types/{{ nameKebab }}';
-import { getDynamodbConnection } from '../dynamodb/dynamodb';
+import { getDynamodbConnection } from 'baseline-dynamodb';
 import { ServiceObject } from '../../util/service-object';
 
 const dynamoDb = getDynamodbConnection();
