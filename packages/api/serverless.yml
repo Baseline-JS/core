@@ -1,0 +1,107 @@
+service: ${env:APP_NAME}-api
+
+frameworkVersion: '>=2.0.0 <4.0.0'
+
+plugins:
+  - serverless-esbuild
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  apiCorsOrigin: '*'
+  esbuild:
+    minify: false
+    packager: npm
+    keepOutputDirectory: true
+    sourcemap: linked # to reduce the size of deployed code you can remove source maps
+    watch:
+      pattern: ['src/**/*.ts']
+      ignore:
+        [
+          'scripts/**/*',
+          '.build/**/*',
+          '.dynamodb/**/*',
+          '.serverless/**/*',
+          '.esbuild/**/*',
+          'node_modules/**/*',
+        ]
+  dynamodb:
+    stages:
+      - local
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+    seed:
+      local:
+        sources:
+          - table: admin-${env:APP_NAME}-${opt:stage}
+            sources: [./src/baseblocks/admin/admin.seed.json]
+
+package:
+  individually: true
+
+provider:
+  stackName: ${self:service}-${sls:stage}-api # Overwrite default CloudFormation stack name. Default is ${self:service}-${sls:stage}
+  name: aws
+  deploymentMethod: direct
+  runtime: nodejs16.x
+  profile: ${env:AWS_PROFILE}
+  region: ${opt:region}
+  stage: ${opt:stage}
+  stackTags:
+    AppName: ${env:APP_NAME}
+    Stage: ${opt:stage}
+    Region: ${opt:region}
+    Product: Baseline
+    LicenseId: ${env:LICENSE_ID}
+  timeout: 30
+  architecture: arm64
+  memorySize: 2048
+  logRetentionInDays: 90
+  versionFunctions: false
+  endpointType: REGIONAL
+  # The environment variables are accessible in all of the lambda functions since if a service is coupled to another
+  # by a route then the service will need to have access to the environment variables it needs. Environment variables
+  # that should only ever be in a specific service route can be defined on the functions.[service].environment
+  environment:
+    NODE_OPTIONS: --enable-source-maps # Lambda will report correct stacktrace location based on source maps
+    ENV: ${opt:stage}
+    API_REGION: ${opt:region}
+    ADMIN_TABLE: admin-${env:APP_NAME}-${opt:stage}
+    API_CORS_ORIGIN: ${self:custom.apiCorsOrigin}
+    COGNITO_USER_POOL_ID:
+      # 'ap-southeast-2_zADQdNgNo' # If manually specifying, format expected "ap-southeast-2_zADQdNgNo"
+      Ref: CognitoUserPool # For local add/invite user operations, comment this line out and uncomment above and set correct user pool id
+  apiGateway:
+    minimumCompressionSize: 1024
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:BatchGetItem
+          Resource:
+            - !Sub ${adminTable.Arn}
+            - !Sub ${adminTable.Arn}/index/*
+        - Effect: Allow
+          Action:
+            - cognito-idp:AdminCreateUser
+            - cognito-idp:AdminGetUser
+            - cognito-idp:ListUsers
+          Resource:
+            - !Sub ${CognitoUserPool.Arn}
+
+resources:
+  - ${file(./src/baseblocks/cognito/cognito-resources.yml)}
+  - ${file(./src/baseblocks/admin/admin-dynamodb.yml)}
+
+functions:
+  - ${file(./src/baseblocks/admin/admin-functions.yml)}

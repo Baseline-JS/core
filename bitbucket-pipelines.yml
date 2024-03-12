@@ -1,0 +1,128 @@
+image: atlassian/default-image:3
+
+pipelines:
+  branches:
+    '{main,prod}':
+      - step:
+          oidc: true
+          name: Deploy API
+          size: 2x
+          script:
+            - touch ~/.bash_profile
+            - . ./scripts/setup-npm.sh
+            - . ./scripts/setup-aws.sh
+            - pnpm install
+            - ./scripts/deploy.sh ./packages/api
+          caches:
+            - root-node
+            - api-node
+            - web-node
+            - admin-node
+            - client-api-node
+      - parallel:
+          - step:
+              oidc: true
+              name: Deploy Web
+              size: 2x
+              script:
+                - touch ~/.bash_profile
+                - . ./scripts/setup-npm.sh
+                - . ./scripts/setup-aws.sh
+                - pnpm install
+                - ./scripts/deploy.sh ./packages/web
+              caches:
+                - root-node
+                - api-node
+                - web-node
+                - admin-node
+                - client-api-node
+          - step:
+              oidc: true
+              name: Deploy Admin
+              size: 2x
+              script:
+                - touch ~/.bash_profile
+                - . ./scripts/setup-npm.sh
+                - . ./scripts/setup-aws.sh
+                - pnpm install
+                - ./scripts/deploy.sh ./packages/admin
+              caches:
+                - root-node
+                - api-node
+                - web-node
+                - admin-node
+                - client-api-node
+  default:
+    - parallel:
+        - step:
+            name: Lint
+            size: 2x
+            script:
+              - touch ~/.bash_profile
+              - . ./scripts/setup-npm.sh
+              - pnpm install
+              - pnpm run lint
+            caches:
+              - root-node
+              - api-node
+              - web-node
+              - admin-node
+              - client-api-node
+        - step:
+            oidc: true
+            name: Build API
+            size: 2x
+            script:
+              - touch ~/.bash_profile
+              - . ./scripts/setup-npm.sh
+              - . ./scripts/setup-aws.sh
+              - pnpm install
+              - cd ./packages/api
+              - pnpm run build
+            caches:
+              - root-node
+              - api-node
+              - web-node
+              - admin-node
+              - client-api-node
+        - step:
+            oidc: true
+            name: Build Web
+            size: 2x
+            script:
+              - touch ~/.bash_profile
+              - . ./scripts/setup-npm.sh
+              - . ./scripts/setup-aws.sh
+              - pnpm install
+              - cd ./packages/web
+              - pnpm run build
+            caches:
+              - root-node
+              - api-node
+              - web-node
+              - admin-node
+              - client-api-node
+        - step:
+            oidc: true
+            name: Build Admin
+            size: 2x
+            script:
+              - touch ~/.bash_profile
+              - . ./scripts/setup-npm.sh
+              - . ./scripts/setup-aws.sh
+              - pnpm install
+              - cd ./packages/admin
+              - pnpm run build
+            caches:
+              - root-node
+              - api-node
+              - web-node
+              - admin-node
+              - client-api-node
+definitions:
+  caches:
+    root-node: ./node_modules
+    api-node: ./packages/api/node_modules
+    web-node: ./packages/web/node_modules
+    admin-node: ./packages/admin/node_modules
+    client-api-node: ./shared/client-api/node_modules

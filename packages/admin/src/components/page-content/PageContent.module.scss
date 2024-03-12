@@ -1,0 +1,19 @@
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.pageContent {
+  position: relative;
+  padding: 98px min(12vw, 144px);
+  background: #efefef;
+
+  .children {
+    animation: fade 500ms forwards ease-in-out;
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "baseline",
+  "private": true,
+  "engines": {
+    "node": ">=14.17",
+    "pnpm": ">=7"
+  },
+  "license": "REFER TO YOUR EULA ON https://app.baselinejs.com",
+  "workspaces": [
+    "packages/api",
+    "shared/client-api",
+    "shared/types",
+    "packages/web",
+    "packages/admin",
+    "commands/add-object"
+  ],
+  "scripts": {
+    "region": "./scripts/set-region.sh",
+    "aws:profile": "./scripts/setup-aws-profile.sh",
+    "setup": "./scripts/setup.sh",
+    "add:env:local": "./scripts/add-env-var.sh local",
+    "add:env:staging": "./scripts/add-env-var.sh staging",
+    "add:env:prod": "./scripts/add-env-var.sh prod",
+    "generate:env:local": "./scripts/generate-env-vars.sh local",
+    "generate:env:staging": "./scripts/generate-env-vars.sh staging",
+    "generate:env:prod": "./scripts/generate-env-vars.sh prod",
+    "urls:staging": "./scripts/project-urls.sh staging",
+    "urls:prod": "./scripts/project-urls.sh prod",
+    "lint": "pnpm --if-present --recursive --parallel run lint",
+    "pretty": "pnpm --if-present --recursive --parallel run pretty",
+    "add:object": "pnpm --filter @baseline/add-object start",
+    "add:user:staging": "pnpm --filter @baseline/api run add:user:staging",
+    "add:user:prod": "pnpm --filter @baseline/api run add:user:prod",
+    "deploy:staging": "pnpm --filter @baseline/api run deploy:staging && pnpm --filter @baseline/admin --filter @baseline/web --if-present --recursive --parallel run deploy:staging",
+    "remove:staging": "pnpm --filter @baseline/api --filter @baseline/admin --filter @baseline/web --if-present --recursive --parallel run remove:staging",
+    "deploy:prod": "pnpm --filter @baseline/api run deploy:prod && pnpm --filter @baseline/admin --filter @baseline/web --if-present --recursive --parallel run deploy:prod",
+    "remove:prod": "pnpm --filter @baseline/api --filter @baseline/admin --filter @baseline/web --if-present --recursive --parallel run remove:prod",
+    "start:api": "pnpm --filter @baseline/api run start",
+    "start:admin": "pnpm --filter @baseline/admin run start",
+    "start:web": "pnpm --filter @baseline/web run start",
+    "license:status": "./scripts/check-license.sh"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "5.35.1",
+    "@typescript-eslint/parser": "5.35.1",
+    "eslint": "8.22.0",
+    "eslint-config-prettier": "8.5.0"
+  },
+  "resolutions": {
+    "dynamodb-localhost": "github:99x/dynamodb-localhost#db30898f8c40932c7177be7b2f1a81360d12876d",
+    "serverless-dynamodb-local": "github:thomas-devika/serverless-dynamodb-local",
+    "@types/react": "17.0.2",
+    "@types/react-native": "0.68.2"
+  }
+}

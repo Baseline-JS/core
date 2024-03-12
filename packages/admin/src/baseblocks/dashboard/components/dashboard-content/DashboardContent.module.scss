@@ -1,0 +1,55 @@
+@use '../../../../styles/global';
+
+.dashboard {
+  h1 {
+    margin-bottom: 32px;
+  }
+
+  .grid {
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: 1fr 1fr;
+
+    @media screen and (max-width: global.$xl) {
+      grid-template-columns: 1fr;
+    }
+
+    .links {
+      a {
+        @include global.mediumFont();
+        display: flex;
+        align-items: center;
+
+        margin-bottom: 16px;
+        padding: 32px;
+        color: #000;
+        text-decoration: none;
+        background: #fff;
+        border: 1px solid #bababa;
+
+        &::before {
+          @include global.mediumFont();
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          margin-right: 16px;
+          color: #fff;
+          font-weight: bold;
+          background: #000;
+          border-radius: 10px;
+          content: '+';
+        }
+      }
+    }
+
+    .preview {
+      margin-bottom: 16px;
+      padding: 32px;
+      background: #fff;
+      border: 1px solid #bababa;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+@use '../../../../styles/global';
+
+.userSettings {
+  h1 {
+    @include global.largeFont();
+    margin-bottom: 32px;
+    font-weight: 700;
+  }
+
+  .settings {
+    @include global.smallFont();
+
+    align-items: center;
+    width: 100%;
+    padding: 18px 48px;
+    background: #fff;
+    border: 1px solid #bababa;
+
+    @media screen and (max-width: global.$lg) {
+      padding: 12px;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    input {
+      padding: 16px;
+      border: 1px solid #bababa;
+      border-radius: unset;
+    }
+
+    button {
+      @include global.smallFont();
+      padding: 12px 24px;
+      background: #fff;
+      border: 1px solid #bababa;
+    }
+
+    .email {
+      display: flex;
+
+      button {
+        border-left: unset;
+      }
+    }
+
+    .signOut {
+      @include global.smallFont();
+    }
+  }
+}

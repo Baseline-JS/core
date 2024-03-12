@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-rational-order",
+    "stylelint-config-css-modules"
+  ],
+  "plugins": ["stylelint-order"],
+  "configBaseDir": "./",
+  "customSyntax": "postcss-scss",
+  "rules": {
+    "order/properties-alphabetical-order": null,
+    "max-nesting-depth": null,
+    "selector-no-qualifying-type": null,
+    "selector-class-pattern": "(^[a-z]+([A-Z]|-)+\\w+$)+|(^([a-z]|-)+\\w+$)",
+    "scss/at-mixin-pattern": "(^[a-z]+([A-Z]|-)+\\w+$)+|(^([a-z]|-)+\\w+$)",
+    "scss/dollar-variable-pattern": "(^[a-z]+([A-Z]|-)+\\w+$)+|(^([a-z]|-)+\\w+$)",
+    "selector-max-compound-selectors": 8,
+    "scss/at-extend-no-missing-placeholder": null,
+    "at-rule-no-unknown": null
+  }
+}

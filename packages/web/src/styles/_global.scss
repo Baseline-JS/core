@@ -1,0 +1,77 @@
+$xl: 1200px;
+$lg: 992px;
+$md: 768px;
+$sm: 576px;
+$animationSpeed: 150ms;
+$breakSize: $md;
+
+@mixin genericButton {
+  @include smallFont(normal, 600);
+
+  display: inline-block;
+  padding: 12px 108px;
+  color: #fff;
+  text-decoration: none;
+  background: #3a3838;
+  border: 2px solid #3a3838;
+  border-radius: 32px;
+  transition: background-color $animationSpeed ease-in-out,
+    color $animationSpeed ease-in-out;
+
+  &:hover {
+    color: #3a3838;
+    background: #fff;
+  }
+}
+
+@mixin smallFont(
+  $style: normal,
+  $weight: normal,
+  $fontFace: 'Montserrat',
+  $fallback: sans-serif
+) {
+  font: $style normal $weight 16px/24px $fontFace, $fallback;
+
+  @media screen and (max-width: $breakSize) {
+    font: $style normal $weight 12px/20px $fontFace, $fallback;
+  }
+}
+
+@mixin mediumFont(
+  $style: normal,
+  $weight: normal,
+  $fontFace: 'Montserrat',
+  $fallback: sans-serif
+) {
+  font: $style normal $weight 24px/32px $fontFace, $fallback;
+
+  @media screen and (max-width: $breakSize) {
+    font: $style normal $weight 16px/24px $fontFace, $fallback;
+  }
+}
+
+@mixin largeFont(
+  $style: normal,
+  $weight: normal,
+  $fontFace: 'Montserrat',
+  $fallback: sans-serif
+) {
+  font: $style normal $weight 40px/49px $fontFace, $fallback;
+
+  @media screen and (max-width: $breakSize) {
+    font: $style normal $weight 24px/32px $fontFace, $fallback;
+  }
+}
+
+@mixin hugeFont(
+  $style: normal,
+  $weight: normal,
+  $fontFace: 'Montserrat',
+  $fallback: sans-serif
+) {
+  font: $style normal $weight 72px/88px $fontFace, $fallback;
+
+  @media screen and (max-width: $breakSize) {
+    font: $style normal $weight 40px/49px $fontFace, $fallback;
+  }
+}
