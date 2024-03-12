@@ -10,9 +10,9 @@
     "start": "./scripts/run-api-local.sh",
     "debug": "export SLS_DEBUG=* && ./scripts/run-api-local-debug.sh",
     "deploy:staging": "./scripts/deploy.sh staging",
-    "remove:staging": ". ../../scripts/project-variables.sh && export LICENSE_ID=remove && npx serverless remove --stage staging --region $REGION",
+    "remove:staging": ". ../../scripts/project-variables.sh && npx serverless remove --stage staging --region $REGION",
     "deploy:prod": "./scripts/deploy.sh prod",
-    "remove:prod": ". ../../scripts/project-variables.sh && export LICENSE_ID=remove && npx serverless remove --stage prod --region $REGION",
+    "remove:prod": ". ../../scripts/project-variables.sh && npx serverless remove --stage prod --region $REGION",
     "add:env:local": "../../scripts/add-env-var.sh local",
     "add:env:staging": "../../scripts/add-env-var.sh staging",
     "add:env:prod": "../../scripts/add-env-var.sh prod",
@@ -21,7 +21,7 @@
     "add:user:prod": "./scripts/add-cognito-user.sh prod",
     "install:dynamodb": ". ../../scripts/project-variables.sh && npx serverless dynamodb install --stage staging --region $REGION",
     "lint": "npx eslint --config '.eslintrc.js' 'src/**/*.{ts,tsx,js}'",
-    "build": ". ../../scripts/project-variables.sh && export LICENSE_ID=build && npx serverless package --stage staging --region $REGION",
+    "build": ". ../../scripts/project-variables.sh && npx serverless package --stage staging --region $REGION",
     "pretty": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}' && npx prettier --write '*.{yml,yaml,js}'"
   },
   "dependencies": {

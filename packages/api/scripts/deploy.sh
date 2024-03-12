@@ -11,7 +11,6 @@ STAGE=$1
 
 . ../../scripts/project-variables.sh
 . ../../scripts/get-stack-outputs.sh "$STAGE" >/dev/null
-. ../../scripts/license-status.sh
 npx serverless deploy --verbose --stage "$STAGE" --region "$REGION"
 
 # check if npx serverless deploy was successful
@@ -21,13 +20,6 @@ else
     echo "Deploy failed"
     cd "$CURRENT_DIR" || exit
     exit 1
-fi
-
-echo "Sending ${STAGE} status to baselinejs.com"
-if [ "$STAGE" == "prod" ]; then
-    curl -d "{\"licenseId\":\"${LICENSE_ID}\",\"prodStatus\":\"EXISTS\",\"awsAccountId\":\"${AWS_ACCOUNT_ID}\"}" -H "Content-Type: application/json" -X POST https://api.baselinejs.com/license/tracker
-else
-    curl -d "{\"licenseId\":\"${LICENSE_ID}\",\"stagingStatus\":\"EXISTS\",\"awsAccountId\":\"${AWS_ACCOUNT_ID}\"}" -H "Content-Type: application/json" -X POST https://api.baselinejs.com/license/tracker
 fi
 
 cd "$CURRENT_DIR" || exit

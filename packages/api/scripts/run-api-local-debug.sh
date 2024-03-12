@@ -25,8 +25,6 @@ fi
 # Restart the API when this is changed.
 export AUTHORIZER='{"claims":{"email":"example@devika.com", "sub":"ed805890-d66b-4126-a5d9-0b22e70fce80"}}'
 
-export LICENSE_ID="local"
-
 # Required to install/use local DynamoDB
 pnpm run install:dynamodb
 

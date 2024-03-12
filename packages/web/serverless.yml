@@ -29,7 +29,6 @@ provider:
     Stage: ${opt:stage}
     Region: ${opt:region}
     Product: Baseline
-    LicenseId: ${env:LICENSE_ID}
 
 # The "Resources" your "Functions" use.  Raw AWS CloudFormation goes in here.
 resources:

@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "deploy:staging": "./scripts/deploy.sh staging",
-    "remove:staging": ". ../../scripts/project-variables.sh && export LICENSE_ID=remove && npx serverless remove --stage staging --region $REGION",
+    "remove:staging": ". ../../scripts/project-variables.sh && npx serverless remove --stage staging --region $REGION",
     "deploy:prod": "./scripts/deploy.sh prod",
-    "remove:prod": ". ../../scripts/project-variables.sh && export LICENSE_ID=remove && npx serverless remove --stage prod --region $REGION",
+    "remove:prod": ". ../../scripts/project-variables.sh && npx serverless remove --stage prod --region $REGION",
     "aws:profile": "../../scripts/setup-aws-profile.sh",
     "start": "npx vite",
     "build": "pnpm run generate:env:staging && npx vite build",

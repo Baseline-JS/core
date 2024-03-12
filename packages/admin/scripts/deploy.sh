@@ -12,7 +12,6 @@ STAGE=$1
 pnpm run generate:env:"$STAGE"
 . ../../scripts/project-variables.sh
 . ../../scripts/get-stack-outputs.sh "$STAGE" >/dev/null
-. ../../scripts/license-status.sh
 pnpm run build:deploy
 npx serverless deploy --verbose --stage "$STAGE" --region "$REGION"
 
