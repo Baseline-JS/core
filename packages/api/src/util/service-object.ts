@@ -1,4 +1,3 @@
-import { Key } from 'aws-sdk/clients/dynamodb';
 import { getErrorMessage } from './error-message';
 import {
   batchGet,
@@ -63,7 +62,7 @@ export class ServiceObject<T extends Record<string, any>> {
         table: this.table,
         key: {
           [this.primaryKey]: `${key}`,
-        } as Key,
+        },
       });
     } catch (error) {
       const message = getErrorMessage(error);
@@ -118,7 +117,7 @@ export class ServiceObject<T extends Record<string, any>> {
         table: this.table,
         key: {
           [this.primaryKey]: `${record[this.primaryKey]}`,
-        } as Key,
+        },
         fields: partial,
       });
     } catch (error) {

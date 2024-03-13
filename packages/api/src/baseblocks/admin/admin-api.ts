@@ -1,5 +1,4 @@
 import { Response } from 'express';
-import * as AWS from 'aws-sdk';
 import { AdminMapper } from './admin';
 import { isAdmin } from '../../middleware/is-admin';
 import {
@@ -12,8 +11,6 @@ import { getErrorMessage } from '../../util/error-message';
 import createApp from '../../util/express-app';
 import createAuthenticatedHandler from '../../util/create-authenticated-handler';
 import { adminService } from './admin.service';
-
-AWS.config.update({ region: process.env.API_REGION });
 
 const app = createApp();
 // app.use(isAdmin); // All private endpoints require the user to be an admin

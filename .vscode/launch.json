@@ -6,7 +6,7 @@
   "configurations": [
     {
       "type": "node",
-      "runtimeVersion": "14",
+      "runtimeVersion": "20",
       "request": "launch",
       "name": "Debug Local API",
       "cwd": "${workspaceFolder}/packages/api",

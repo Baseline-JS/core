@@ -1,5 +1,4 @@
 import { Response } from 'express';
-import * as AWS from 'aws-sdk';
 import { {{ nameCamel }}Mapper } from './{{ nameKebab }}';
 import { isAdmin } from '../../middleware/is-admin';
 import { RequestContext } from '../../util/request-context.type';
@@ -8,8 +7,6 @@ import { getErrorMessage } from '../../util/error-message';
 import createApp from '../../util/express-app';
 import createAuthenticatedHandler from '../../util/create-authenticated-handler';
 import { {{ nameCamel }}Service } from './{{ nameKebab }}.service';
-
-AWS.config.update({ region: process.env.API_REGION });
 
 const app = createApp();
 // app.use(isAdmin); // All private endpoints require the user to be an admin
