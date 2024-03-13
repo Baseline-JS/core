@@ -33,6 +33,6 @@ pnpm run install:dynamodb
 # export NODE_OPTIONS=--enable-source-maps
 
 # Start the API with serverless
-export SLS_DEBUG="*" && node --inspect ./node_modules/serverless/bin/serverless offline start --stage local --region "$REGION" --httpPort 4000 --verbose --reloadHandler "$@"
+export SLS_DEBUG="*" && node --inspect ./node_modules/serverless/bin/serverless offline start --stage local --region "$REGION" --httpPort 4000 --verbose "$@"
 
 cd "$CURRENT_DIR" || exit
