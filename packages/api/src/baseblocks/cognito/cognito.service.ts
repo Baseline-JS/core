@@ -1,22 +1,25 @@
-import * as AWS from 'aws-sdk';
+import * as AWS_CognitoIdentityServiceProvider from '@aws-sdk/client-cognito-identity-provider';
 
-const cognito = new AWS.CognitoIdentityServiceProvider({
-  region: process.env.AWS_REGION || 'ap-southeast-2',
+const { CognitoIdentityProvider: CognitoIdentityServiceProvider } =
+  AWS_CognitoIdentityServiceProvider;
+
+const cognito = new CognitoIdentityServiceProvider({
+  region: process.env.API_REGION || 'ap-southeast-2',
 });
 
 export async function getUserAttributesByEmail(userEmail: string) {
   try {
     const formattedEmail = userEmail?.toLowerCase();
-    const existingResponse = await cognito
-      .adminGetUser({
-        UserPoolId: `${process.env.COGNITO_USER_POOL_ID}`,
-        Username: `${formattedEmail}`,
-      })
-      .promise();
+    const existingResponse = await cognito.adminGetUser({
+      UserPoolId: `${process.env.COGNITO_USER_POOL_ID}`,
+      Username: `${formattedEmail}`,
+    });
     console.log(JSON.stringify(existingResponse, null, 2));
     const attributes = existingResponse?.UserAttributes?.reduce(
       (prev, attr) => {
-        prev[attr.Name] = `${attr.Value}`;
+        if (attr?.Name) {
+          prev[attr.Name] = `${attr.Value}`;
+        }
         return prev;
       },
       {} as { [key: string]: string },
@@ -41,19 +44,19 @@ export async function createUser(userEmail: string) {
         Value: 'true',
       },
     ];
-    const cognitoUser = await cognito
-      .adminCreateUser({
-        UserPoolId: process.env.COGNITO_USER_POOL_ID,
-        Username: formattedEmail,
-        UserAttributes: userAttributes,
-        DesiredDeliveryMediums: ['EMAIL'],
-      } as AWS.CognitoIdentityServiceProvider.Types.AdminCreateUserRequest)
-      .promise();
+    const cognitoUser = await cognito.adminCreateUser({
+      UserPoolId: process.env.COGNITO_USER_POOL_ID,
+      Username: formattedEmail,
+      UserAttributes: userAttributes,
+      DesiredDeliveryMediums: ['EMAIL'],
+    });
 
     console.log(JSON.stringify(cognitoUser, null, 2));
 
     const attributes = cognitoUser.User?.Attributes?.reduce((prev, attr) => {
-      prev[attr.Name] = `${attr.Value}`;
+      if (attr.Name) {
+        prev[attr.Name] = `${attr.Value}`;
+      }
       return prev;
     }, {} as { [key: string]: string });
 
@@ -74,7 +77,9 @@ export async function getUsers(args: {
   pageSize?: number;
   paginationToken?: string;
   isExactMatch?: boolean;
-}): Promise<AWS.CognitoIdentityServiceProvider.ListUsersResponse | undefined> {
+}): Promise<
+  AWS_CognitoIdentityServiceProvider.ListUsersCommandOutput | undefined
+> {
   const {
     subFilter,
     usernameFilter,
@@ -93,7 +98,7 @@ export async function getUsers(args: {
       UserPoolId: process.env.COGNITO_USER_POOL_ID,
       Limit: pageSize || 50,
       PaginationToken: paginationToken,
-    } as AWS.CognitoIdentityServiceProvider.ListUsersRequest;
+    } as AWS_CognitoIdentityServiceProvider.ListUsersCommandInput;
 
     let field = '';
     let value = '';
@@ -138,7 +143,7 @@ export async function getUsers(args: {
       requestArgs.Filter = `${field} ${comparison} "${value}"`;
     }
 
-    const response = await cognito.listUsers(requestArgs).promise();
+    const response = await cognito.listUsers(requestArgs);
     return response;
   } catch (error) {
     console.log('No users found: ', error);

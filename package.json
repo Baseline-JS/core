@@ -2,7 +2,7 @@
   "name": "baseline",
   "private": true,
   "engines": {
-    "node": ">=14.17",
+    "node": ">=20",
     "pnpm": ">=7"
   },
   "license": "REFER TO YOUR EULA ON https://app.baselinejs.com",

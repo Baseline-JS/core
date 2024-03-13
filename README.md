@@ -9,8 +9,8 @@ The Baseline Core is a fullstack serverless framework designed to help teams del
 These must be installed before following the setup instructions.
 
 - Macos or Linux OS
-  - Node.js v14 (v14.17 or higher and < v15) & npm@7.24.2 or higher [(we suggest installing and using nvm)](https://github.com/nvm-sh/nvm#install--update-script) follow instructions in the link to install, you will generally need to create a new terminal session after installing. If you already have nvm update it before proceeding.
-    - If nvm is installed you can switch versions with `nvm install 14.20.1 && nvm use 14.20.1 && nvm install-latest-npm`
+  - Node.js v20 (v20 or higher) & npm@10.5.0 or higher [(we suggest installing and using nvm)](https://github.com/nvm-sh/nvm#install--update-script) follow instructions in the link to install, you will generally need to create a new terminal session after installing. If you already have nvm update it before proceeding.
+    - If nvm is installed you can switch versions with `nvm install 20 && nvm use 20 && nvm alias default 20 && nvm install-latest-npm`
     - If not using nvm you can manually install node and npm, download from <https://nodejs.org/en/download/> alternatively use the operating system package manager or any other appropriate tool to install node
     - Current versions can be checked with `node -v`, `npm -v`
   - pnpm version 7, version can be checked with `pnpm -v`, install with `npm install -g pnpm@7` [or other methods](https://pnpm.io/installation)
