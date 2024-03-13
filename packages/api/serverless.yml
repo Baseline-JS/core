@@ -9,11 +9,17 @@ plugins:
 
 custom:
   apiCorsOrigin: '*'
+  esbuildAWSExclude: # patch to include aws sdk v3 when running locally, hopefully serverless-offline fixes in the future
+    local: ''
+    staging: '@aws-sdk'
+    prod: '@aws-sdk'
   esbuild:
     minify: false
-    packager: npm
+    packager: pnpm
     keepOutputDirectory: true
     sourcemap: linked # to reduce the size of deployed code you can remove source maps
+    exclude:
+      - ${self:custom.esbuildAWSExclude.${opt:stage}}
     watch:
       pattern: ['src/**/*.ts']
       ignore:
