@@ -46,8 +46,6 @@
     "eslint-config-prettier": "8.5.0"
   },
   "resolutions": {
-    "dynamodb-localhost": "github:99x/dynamodb-localhost#db30898f8c40932c7177be7b2f1a81360d12876d",
-    "serverless-dynamodb-local": "github:thomas-devika/serverless-dynamodb-local",
     "@types/react": "17.0.2",
     "@types/react-native": "0.68.2"
   }

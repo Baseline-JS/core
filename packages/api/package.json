@@ -44,7 +44,7 @@
     "esbuild": "0.20.1",
     "prettier": "2.4.1",
     "serverless": "3.38.0",
-    "serverless-dynamodb-local": "0.2.40",
+    "serverless-dynamodb": "0.2.50",
     "serverless-esbuild": "1.52.1",
     "serverless-offline": "13.3.3",
     "stylelint": "14.0.0",
