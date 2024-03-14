@@ -24,7 +24,7 @@
     "@baseline/types": "1.0.0",
     "@vitejs/plugin-react": "4.0.0",
     "aws-amplify": "4.3.35",
-    "axios": "0.26.1",
+    "axios": "1.6.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-helmet": "6.1.0",
