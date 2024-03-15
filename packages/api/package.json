@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "3.530.0",
-    "@baseline/types": "1.0.0",
+    "@baseline/types": "workspace:1.0.0",
     "aws-lambda": "1.0.7",
     "baseline-dynamodb": "0.1.2",
     "compression": "1.7.4",
