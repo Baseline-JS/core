@@ -27,7 +27,7 @@
     "react-helmet": "6.1.0",
     "react-router-dom": "6.3.0",
     "reactstrap": "9.0.1",
-    "typescript": "4.6.4",
+    "typescript": "5.4.2",
     "vite": "5.1.6",
     "vite-plugin-environment": "1.1.3"
   },
