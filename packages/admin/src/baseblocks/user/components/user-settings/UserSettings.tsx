@@ -1,14 +1,12 @@
-import { CognitoUser } from 'amazon-cognito-identity-js';
-import { Auth } from 'aws-amplify';
+import {
+  signOut,
+  updateUserAttributes,
+  confirmUserAttribute,
+  fetchUserAttributes,
+} from 'aws-amplify/auth';
 import React, { useEffect, useState } from 'react';
 import { FormFeedback, FormGroup, Input, Label } from 'reactstrap';
 import styles from './UserSettings.module.scss';
-
-interface UserInfo {
-  id?: string;
-  username: string;
-  attributes: Record<string, string>;
-}
 
 interface Props {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,15 +15,15 @@ interface Props {
 const UserSettings = (props: Props): JSX.Element => {
   const [email, setEmail] = useState<string>('');
   const [isChangingEmail, setIsChangingEmail] = useState(false);
-  const [hasSubmitEmailChange, setHasSubmitEmailChange] = useState(false);
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [isCodeInvalid, setIsCodeInvalid] = useState<undefined | boolean>();
   const [changingEmailCode, setChangingEmailCode] = useState('');
   const { setIsLoading } = props;
 
   const getUserDetails = async () => {
-    const info = (await Auth.currentUserInfo()) as UserInfo;
-    setEmail(info.attributes.email);
-    setHasSubmitEmailChange(!info.attributes.email_verified);
+    const { email, email_verified } = await fetchUserAttributes();
+    setEmail(email);
+    setIsEmailVerified(email_verified !== 'false');
   };
 
   useEffect(() => {
@@ -37,23 +35,25 @@ const UserSettings = (props: Props): JSX.Element => {
   }, []);
 
   const handleEmailChange = async () => {
-    const user = (await Auth.currentAuthenticatedUser()) as CognitoUser;
-    const info = (await Auth.currentUserInfo()) as UserInfo;
-
+    const attributes = await fetchUserAttributes();
     setIsChangingEmail(false);
-
-    if (info.attributes.email !== email) {
-      setHasSubmitEmailChange(true);
-      await Auth.updateUserAttributes(user, {
-        email,
+    if (attributes.email !== email) {
+      setIsEmailVerified(false);
+      await updateUserAttributes({
+        userAttributes: {
+          email: email,
+        },
       });
     }
   };
 
-  const finaliseEmailChange = async () => {
+  const finalizeEmailChange = async () => {
     try {
-      await Auth.verifyCurrentUserAttributeSubmit('email', changingEmailCode);
-      setHasSubmitEmailChange(false);
+      await confirmUserAttribute({
+        userAttributeKey: 'email',
+        confirmationCode: changingEmailCode,
+      });
+      setIsEmailVerified(true);
       setChangingEmailCode('');
     } catch {
       console.log('Invalid code');
@@ -78,7 +78,7 @@ const UserSettings = (props: Props): JSX.Element => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <button
-              disabled={hasSubmitEmailChange}
+              disabled={!isEmailVerified}
               onClick={() => {
                 isChangingEmail
                   ? void handleEmailChange()
@@ -89,7 +89,7 @@ const UserSettings = (props: Props): JSX.Element => {
             </button>
           </div>
         </FormGroup>
-        {hasSubmitEmailChange ? (
+        {!isEmailVerified ? (
           <FormGroup>
             <Label for="code">Check your email for a code</Label>
             <div className={styles.email}>
@@ -104,14 +104,14 @@ const UserSettings = (props: Props): JSX.Element => {
               />
               <button
                 onClick={() => {
-                  void finaliseEmailChange();
+                  void finalizeEmailChange();
                 }}
               >
                 Submit
               </button>
               <button
                 onClick={() => {
-                  setHasSubmitEmailChange(false);
+                  setIsEmailVerified(true);
                   setIsChangingEmail(true);
                 }}
               >
@@ -128,7 +128,7 @@ const UserSettings = (props: Props): JSX.Element => {
         <button
           className={styles.signOut}
           onClick={() => {
-            void Auth.signOut();
+            void signOut();
           }}
         >
           Sign out
