@@ -1,7 +1,6 @@
 {
   "extends": [
     "stylelint-config-sass-guidelines",
-    "stylelint-config-rational-order",
     "stylelint-config-css-modules"
   ],
   "plugins": ["stylelint-order"],
