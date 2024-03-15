@@ -46,7 +46,6 @@
     "serverless-s3-sync": "3.1.0",
     "stylelint": "16.2.1",
     "stylelint-config-css-modules": "4.4.0",
-    "stylelint-config-rational-order": "0.1.2",
     "stylelint-config-sass-guidelines": "11.1.0",
     "stylelint-config-standard": "36.0.0",
     "stylelint-config-standard-scss": "13.0.0",
