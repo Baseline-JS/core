@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Hub, Amplify, Auth } from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
+import { fetchAuthSession, signOut } from 'aws-amplify/auth';
+import { Hub } from 'aws-amplify/utils';
 import { Authenticator } from '@aws-amplify/ui-react';
 import { checkAdmin } from '@baseline/client-api/admin';
 import { Route, Routes, useNavigate } from 'react-router-dom';
@@ -17,13 +19,13 @@ import { AxiosRequestConfig } from 'axios';
 
 Amplify.configure({
   Auth: {
-    mandatorySignIn: true,
-    authenticationFlowType: 'USER_PASSWORD_AUTH',
-    region: process.env.REACT_APP_COGNITO_REGION || '',
-    identityPoolId: process.env.REACT_APP_COGNITO_IDENTITY_POOL_ID || '',
-    userPoolId: process.env.REACT_APP_COGNITO_USER_POOL_ID || '',
-    userPoolWebClientId:
-      process.env.REACT_APP_COGNITO_USER_POOL_WEB_CLIENT_ID || '',
+    Cognito: {
+      signUpVerificationMethod: 'code',
+      identityPoolId: process.env.REACT_APP_COGNITO_IDENTITY_POOL_ID || '',
+      userPoolId: process.env.REACT_APP_COGNITO_USER_POOL_ID || '',
+      userPoolClientId:
+        process.env.REACT_APP_COGNITO_USER_POOL_WEB_CLIENT_ID || '',
+    },
   },
 });
 
@@ -35,10 +37,9 @@ const App = () => {
   const handleAuth = async (): Promise<void> => {
     createRequestHandler(
       async (config: AxiosRequestConfig): Promise<AxiosRequestConfig> => {
-        const res = await Auth.currentSession();
-        const token = res.getIdToken().getJwtToken();
+        const authSession = await fetchAuthSession();
         if (!config.headers) config.headers = {};
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `Bearer ${authSession?.tokens?.idToken}`;
         return config;
       },
     );
@@ -50,38 +51,30 @@ const App = () => {
   useEffect(() => {
     void (async () => {
       try {
-        const res = await Auth.currentSession();
-        const token = res.getIdToken().getJwtToken();
-        if (token) {
+        const authSession = await fetchAuthSession();
+        if (authSession?.tokens?.idToken) {
           await handleAuth();
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     })();
 
     Hub.listen('auth', (data) => {
       switch (data.payload.event) {
-        case 'signIn':
+        case 'signedIn':
           void handleAuth();
-          console.log('user signed in');
           break;
-        case 'signUp':
-          console.log('user signed up');
-          break;
-        case 'signOut':
+        case 'signedOut':
           setIsAuthenticated(false);
           navigate('/');
-          console.log('user signed out');
           break;
-        case 'signIn_failure':
-          console.log('user sign in failed');
+        case 'signInWithRedirect_failure':
           break;
-        case 'configured':
-          console.log('the Auth module is configured');
+        case 'tokenRefresh':
           break;
         default:
-          console.log('Unknown event');
+          console.debug(`Unhandled event: ${data.payload.event}`);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -108,7 +101,7 @@ const App = () => {
                   <p>You do not have permission to view this content</p>
                   <button
                     onClick={() => {
-                      void Auth.signOut();
+                      void signOut();
                     }}
                   >
                     Sign out

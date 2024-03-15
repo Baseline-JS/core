@@ -19,11 +19,11 @@
     "pretty": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}' && npx prettier --write 'public/**/*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}' && npx prettier --write '*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}'"
   },
   "dependencies": {
-    "@aws-amplify/ui-react": "3.5.1",
+    "@aws-amplify/ui-react": "6.1.6",
     "@baseline/client-api": "1.0.0",
     "@baseline/types": "1.0.0",
     "@vitejs/plugin-react": "4.0.0",
-    "aws-amplify": "4.3.35",
+    "aws-amplify": "6.0.20",
     "axios": "1.6.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -32,7 +32,7 @@
     "react-select": "5.4.0",
     "reactstrap": "9.0.1",
     "typescript": "4.6.4",
-    "vite": "4.3.3",
+    "vite": "5.1.6",
     "vite-plugin-environment": "1.1.3"
   },
   "devDependencies": {
