@@ -19,8 +19,8 @@
     "pretty": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}'"
   },
   "dependencies": {
-    "@baseline/client-api": "1.0.0",
-    "@baseline/types": "1.0.0",
+    "@baseline/client-api": "workspace:1.0.0",
+    "@baseline/types": "workspace:1.0.0",
     "@vitejs/plugin-react": "4.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
