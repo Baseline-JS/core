@@ -4,7 +4,7 @@ frameworkVersion: '>=2.0.0 <4.0.0'
 
 plugins:
   - serverless-s3-sync
-  - serverless-cloudfront-invalidate
+  - serverless-baseline-invalidate-cloudfront
 
 custom:
   s3Sync:
