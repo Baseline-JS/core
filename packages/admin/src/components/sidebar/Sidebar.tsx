@@ -24,9 +24,9 @@ const Sidebar = (): JSX.Element => {
 
       <div className={styles.links}>
         <Link
-          to="/"
+          to="/dashboard"
           className={`${styles.link} ${
-            location.pathname === '/' ? styles.active : ''
+            location.pathname === '/dashboard' ? styles.active : ''
           }`}
         >
           <img src="/icons/home.svg" alt="Home" />

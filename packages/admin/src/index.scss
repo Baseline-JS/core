@@ -23,9 +23,17 @@ code {
   display: flex;
   min-height: 100vh;
   overflow: hidden;
+  flex-direction: row;
+  flex: 1 1 auto;
 
   > div:last-of-type {
     flex: 1 1 auto;
     min-width: min(100vw, 390px);
   }
+}
+
+[id=root] {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
 }
