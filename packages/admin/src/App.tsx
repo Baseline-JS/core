@@ -1,21 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Amplify } from 'aws-amplify';
-import { fetchAuthSession, signOut } from 'aws-amplify/auth';
+import { fetchAuthSession } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
-import { Authenticator } from '@aws-amplify/ui-react';
 import { checkAdmin } from '@baseline/client-api/admin';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import {
+  Outlet,
+  RouterProvider,
+  createBrowserRouter,
+  redirect,
+} from 'react-router-dom';
 import '@aws-amplify/ui-react/styles.css';
 import Dashboard from './baseblocks/dashboard/pages/Dashboard';
 import User from './baseblocks/user/pages/User';
-import PageContent from './components/page-content/PageContent';
-import Sidebar from './components/sidebar/Sidebar';
 import Admins from './baseblocks/admin/pages/Admins';
 import {
   createRequestHandler,
   getRequestHandler,
 } from '@baseline/client-api/request-handler';
 import { AxiosRequestConfig } from 'axios';
+import Home from './baseblocks/home/pages/Home';
+import Loader from './components/page-content/loader/Loader';
+import Login from './baseblocks/login/pages/Login';
+import NotAdmin from './baseblocks/not-admin/pages/NotAdmin';
 
 Amplify.configure({
   Auth: {
@@ -29,45 +35,16 @@ Amplify.configure({
   },
 });
 
-const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isAdmin, setIsAdmin] = useState<boolean>(undefined);
-  const navigate = useNavigate();
-
-  const handleAuth = async (): Promise<void> => {
-    createRequestHandler(
-      async (config: AxiosRequestConfig): Promise<AxiosRequestConfig> => {
-        const authSession = await fetchAuthSession();
-        if (!config.headers) config.headers = {};
-        config.headers.Authorization = `Bearer ${authSession?.tokens?.idToken}`;
-        return config;
-      },
-    );
-    setIsAdmin(await checkAdmin(getRequestHandler()));
-    setIsAuthenticated(true);
-  };
-
-  // Check on first load if user is still logged in
+export default function App() {
   useEffect(() => {
-    void (async () => {
-      try {
-        const authSession = await fetchAuthSession();
-        if (authSession?.tokens?.idToken) {
-          await handleAuth();
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-
-    Hub.listen('auth', (data) => {
+    return Hub.listen('auth', (data) => {
+      console.debug('auth event', data.payload.event);
       switch (data.payload.event) {
         case 'signedIn':
-          void handleAuth();
+          router.navigate('/dashboard').catch((e) => console.error(e));
           break;
         case 'signedOut':
-          setIsAuthenticated(false);
-          navigate('/');
+          router.navigate('/').catch((e) => console.error(e));
           break;
         case 'signInWithRedirect_failure':
           break;
@@ -77,43 +54,70 @@ const App = () => {
           console.debug(`Unhandled event: ${data.payload.event}`);
       }
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="app">
-      {isAuthenticated && isAdmin ? <Sidebar /> : <></>}
-      <Authenticator>
-        {() =>
-          isAdmin ? (
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/admins" element={<Admins />} />
-              <Route path="/settings" element={<User />} />
-            </Routes>
-          ) : (
-            <PageContent>
-              {isAdmin === undefined ? (
-                <>{/** Waiting on API */}</>
-              ) : (
-                <>
-                  <h1>Please contact your system administrator</h1>
-                  <p>You do not have permission to view this content</p>
-                  <button
-                    onClick={() => {
-                      void signOut();
-                    }}
-                  >
-                    Sign out
-                  </button>
-                </>
-              )}
-            </PageContent>
-          )
-        }
-      </Authenticator>
-    </div>
+    <RouterProvider
+      router={router}
+      fallbackElement={<Loader isLoading={true} hasStartedLoading={true} />}
+    />
   );
-};
+}
 
-export default App;
+async function protectedLoader() {
+  console.debug('protected loader');
+  if (!getRequestHandler()) {
+    console.debug('creating request handler');
+    createRequestHandler(
+      async (config: AxiosRequestConfig): Promise<AxiosRequestConfig> => {
+        const authSession = await fetchAuthSession();
+        if (!config.headers) config.headers = {};
+        config.headers.Authorization = `Bearer ${authSession?.tokens?.idToken}`;
+        return config;
+      },
+    );
+  }
+  const authSession = await fetchAuthSession();
+  if (!authSession?.tokens?.idToken) {
+    return redirect('/login');
+  }
+  const isAdmin = await checkAdmin(getRequestHandler());
+  if (!isAdmin) {
+    return redirect('/not-admin');
+  }
+  return null;
+}
+
+async function loginLoader() {
+  console.debug('login loader');
+  const authSession = await fetchAuthSession();
+  if (authSession?.tokens?.idToken) {
+    console.debug('redirecting to dashboard');
+    return redirect('/dashboard');
+  }
+  return null;
+}
+
+const router = createBrowserRouter([
+  {
+    id: 'public',
+    path: '/',
+    Component: Outlet,
+    children: [
+      { path: '/', Component: Home, index: true },
+      { path: '/not-admin', Component: NotAdmin },
+      { path: '/login', Component: Login, loader: loginLoader },
+    ],
+  },
+  {
+    id: 'protected',
+    path: '/',
+    Component: Outlet,
+    loader: protectedLoader,
+    children: [
+      { path: '/dashboard', Component: Dashboard },
+      { path: '/admins', Component: Admins },
+      { path: '/settings', Component: User },
+    ],
+  },
+]);

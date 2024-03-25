@@ -16,11 +16,19 @@ const AdminList = (props: Props): JSX.Element => {
 
   useEffect(() => {
     void (async () => {
-      setIsLoading(true);
-      const admins = await getAllAdmins(getRequestHandler());
-      setAllAdmins(admins);
-      setIsLoading(false);
+      try {
+        setIsLoading(true);
+        const admins = await getAllAdmins(getRequestHandler());
+        setAllAdmins(admins);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+      }
     })();
+    return () => {
+      setAllAdmins([]);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setAllAdmins]);
 

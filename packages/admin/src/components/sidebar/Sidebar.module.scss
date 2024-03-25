@@ -89,6 +89,9 @@ $animationSpeed: 250ms;
         span {
           color: #000;
         }
+
+        pointer-events: none;
+        user-select: none;
       }
 
       &:hover {
