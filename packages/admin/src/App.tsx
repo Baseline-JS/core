@@ -22,6 +22,7 @@ import Home from './baseblocks/home/pages/Home';
 import Loader from './components/page-content/loader/Loader';
 import Login from './baseblocks/login/pages/Login';
 import NotAdmin from './baseblocks/not-admin/pages/NotAdmin';
+import Layout from './components/layout/Layout';
 
 Amplify.configure({
   Auth: {
@@ -112,7 +113,7 @@ const router = createBrowserRouter([
   {
     id: 'protected',
     path: '/',
-    Component: Outlet,
+    Component: Layout,
     loader: protectedLoader,
     children: [
       { path: '/dashboard', Component: Dashboard },
