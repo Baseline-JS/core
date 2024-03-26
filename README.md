@@ -441,10 +441,6 @@ done - don't forget to add the variable to all stages
 
 It is recommended to follow the naming scheme used by the packages in the project. This will keep references in the code consistent and make it easier to find things. There is a chance naming them could cause issues with any external examples that may expect the package to be named a certain way.
 
-# Licensing
-
-Please see LICENSE file.
-
 # Baseline
 
 If you would like to learn more about what we do please visit [Devika Baseline](https://baselinejs.com/)
