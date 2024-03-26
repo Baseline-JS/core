@@ -5,7 +5,7 @@
     "node": ">=20",
     "pnpm": ">=7"
   },
-  "license": "REFER TO YOUR EULA ON https://app.baselinejs.com",
+  "license": "MIT",
   "workspaces": [
     "packages/api",
     "shared/client-api",
