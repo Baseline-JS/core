@@ -49,7 +49,6 @@ package:
   individually: true
 
 provider:
-  stackName: ${self:service}-${sls:stage}-api # Overwrite default CloudFormation stack name. Default is ${self:service}-${sls:stage}
   name: aws
   deploymentMethod: direct
   runtime: nodejs20.x

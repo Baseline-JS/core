@@ -16,7 +16,6 @@ custom:
         - '/*'
 
 provider:
-  stackName: ${self:service}-${sls:stage} # Overwrite default CloudFormation stack name. Default is ${self:service}-${sls:stage}
   name: aws
   runtime: nodejs20.x
   profile: ${env:AWS_PROFILE}
