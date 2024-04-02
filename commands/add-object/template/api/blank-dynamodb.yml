@@ -1,6 +1,8 @@
 Resources:
   {{ nameCamel }}Table:
     Type: AWS::DynamoDB::Table
+    DeletionPolicy: ${self:custom.deletionPolicy.${opt:stage}}
+    UpdateReplacePolicy: ${self:custom.updatePolicy.${opt:stage}}
     Properties:
       TableName: {{ nameKebab }}-${env:APP_NAME}-${opt:stage}
       AttributeDefinitions:

@@ -9,6 +9,14 @@ plugins:
 
 custom:
   apiCorsOrigin: '*'
+  deletionPolicy:
+    local: 'Delete'
+    staging: 'Delete'
+    prod: 'Retain'
+  updatePolicy:
+    local: 'Delete'
+    staging: 'Delete'
+    prod: 'Retain'
   esbuildAWSExclude: # patch to include aws sdk v3 when running locally, hopefully serverless-offline fixes in the future
     local: ''
     staging: '@aws-sdk'

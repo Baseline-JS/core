@@ -1,6 +1,8 @@
 Resources:
   adminTable:
     Type: AWS::DynamoDB::Table
+    DeletionPolicy: ${self:custom.deletionPolicy.${opt:stage}}
+    UpdateReplacePolicy: ${self:custom.updatePolicy.${opt:stage}}
     Properties:
       TableName: admin-${env:APP_NAME}-${opt:stage}
       AttributeDefinitions:
