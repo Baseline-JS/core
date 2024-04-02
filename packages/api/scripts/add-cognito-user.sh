@@ -30,6 +30,19 @@ fi
 printf "Email: "
 read -r USER_EMAIL
 
+if [ "$USER_EMAIL" == "" ]; then
+  echo "Error: No user email set"
+  exit 1
+fi
+
+echo
+echo "Password Requirements:"
+echo "- 8 character minimum length"
+echo "- Contains at least 1 number"
+echo "- Contains at least 1 lowercase letter"
+echo "- Contains at least 1 uppercase letter"
+echo "- Contains at least 1 special character"
+
 printf "Password: "
 read -sr USER_PASSWORD
 echo ""
