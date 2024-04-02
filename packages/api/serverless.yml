@@ -21,16 +21,8 @@ custom:
     exclude:
       - ${self:custom.esbuildAWSExclude.${opt:stage}}
     watch:
-      pattern: ['src/**/*.ts']
-      ignore:
-        [
-          'scripts/**/*',
-          '.build/**/*',
-          '.dynamodb/**/*',
-          '.serverless/**/*',
-          '.esbuild/**/*',
-          'node_modules/**/*',
-        ]
+      pattern: 'src/**/*.ts'
+      ignore: 'scripts/**/* .build/**/* .dynamodb/**/* .serverless/**/* .esbuild/**/* node_modules/**/*'
   serverless-dynamodb:
     stages:
       - local
