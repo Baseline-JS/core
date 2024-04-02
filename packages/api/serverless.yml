@@ -54,7 +54,6 @@ provider:
   deploymentMethod: direct
   runtime: nodejs20.x
   profile: ${env:AWS_PROFILE}
-  region: ${opt:region}
   stage: ${opt:stage}
   stackTags:
     AppName: ${env:APP_NAME}
