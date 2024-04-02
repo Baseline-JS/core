@@ -50,8 +50,5 @@
     "stylelint": "16.2.1",
     "stylelint-order": "6.0.4",
     "typescript": "5.4.2"
-  },
-  "resolutions": {
-    "colors": "1.4.0"
   }
 }
