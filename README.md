@@ -13,7 +13,7 @@ These must be installed before following the setup instructions.
     - If nvm is installed you can switch versions with `nvm install 20 && nvm use 20 && nvm alias default 20 && nvm install-latest-npm`
     - If not using nvm you can manually install node and npm, download from <https://nodejs.org/en/download/> alternatively use the operating system package manager or any other appropriate tool to install node
     - Current versions can be checked with `node -v`, `npm -v`
-  - pnpm version 7, version can be checked with `pnpm -v`, install with `npm install -g pnpm@7` [or other methods](https://pnpm.io/installation)
+  - pnpm version 8, version can be checked with `pnpm -v`, install with `npm install -g pnpm@8` [or other methods](https://pnpm.io/installation)
   - [AWS CLI v2](https://aws.amazon.com/cli)
   - Homebrew, for Mac users only, follow install instructions [here](https://brew.sh/)
   - [jq](https://stedolan.github.io/jq/download/) for extracting Cloudformation outputs
