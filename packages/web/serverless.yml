@@ -20,7 +20,6 @@ provider:
   name: aws
   runtime: nodejs20.x
   profile: ${env:AWS_PROFILE}
-  region: ${opt:region}
   stage: ${opt:stage}
   deploymentMethod: direct
   deploymentPrefix: ${self:service}-${sls:stage}
