@@ -42,7 +42,7 @@ custom:
     seed:
       local:
         sources:
-          - table: admin-${env:APP_NAME}-${opt:stage}
+          - table: ${env:APP_NAME}-${opt:stage}-admin
             sources: [./src/baseblocks/admin/admin.seed.json]
 
 package:
@@ -72,7 +72,7 @@ provider:
     NODE_OPTIONS: --enable-source-maps # Lambda will report correct stacktrace location based on source maps
     ENV: ${opt:stage}
     API_REGION: ${opt:region}
-    ADMIN_TABLE: admin-${env:APP_NAME}-${opt:stage}
+    ADMIN_TABLE: ${env:APP_NAME}-${opt:stage}-admin
     API_CORS_ORIGIN: ${self:custom.apiCorsOrigin}
     COGNITO_USER_POOL_ID:
       # 'ap-southeast-2_zADQdNgNo' # If manually specifying, format expected "ap-southeast-2_zADQdNgNo"

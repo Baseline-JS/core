@@ -4,7 +4,7 @@ Resources:
     DeletionPolicy: ${self:custom.deletionPolicy.${opt:stage}}
     UpdateReplacePolicy: ${self:custom.updatePolicy.${opt:stage}}
     Properties:
-      TableName: admin-${env:APP_NAME}-${opt:stage}
+      TableName: ${env:APP_NAME}-${opt:stage}-admin
       AttributeDefinitions:
         - AttributeName: userSub
           AttributeType: S

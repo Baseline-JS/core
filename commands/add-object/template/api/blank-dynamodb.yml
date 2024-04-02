@@ -4,7 +4,7 @@ Resources:
     DeletionPolicy: ${self:custom.deletionPolicy.${opt:stage}}
     UpdateReplacePolicy: ${self:custom.updatePolicy.${opt:stage}}
     Properties:
-      TableName: {{ nameKebab }}-${env:APP_NAME}-${opt:stage}
+      TableName: ${env:APP_NAME}-${opt:stage}-{{ nameKebab }}
       AttributeDefinitions:
         - AttributeName: {{ primaryKey }}
           AttributeType: S

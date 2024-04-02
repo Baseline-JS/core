@@ -14,7 +14,7 @@ STAGE=$1
 # Sets REGION, APP_NAME, AWS_REGION, AWS_PROFILE
 . ../../scripts/project-variables.sh
 
-TABLE="admin-${APP_NAME}-${STAGE}"
+TABLE="${APP_NAME}-${STAGE}-admin"
 
 echo "Getting Cognito User Pool Id from [$STAGE]..."
 . ../../scripts/get-stack-outputs.sh "$STAGE" >/dev/null
