@@ -7,6 +7,6 @@ const dynamoDb = getDynamodbConnection();
 export const {{ nameCamel }}Service = new ServiceObject<{{ nameFirst }}>({
   dynamoDb: dynamoDb,
   objectName: '{{ nameFirst }}',
-  table: `${process.env.{{ nameSnakeUpper }}_TABLE}`,
+  table: `${process.env.APP_NAME}-${process.env.NODE_ENV}-{{ nameSnakeUpper }}`,
   primaryKey: '{{ primaryKey }}',
 });

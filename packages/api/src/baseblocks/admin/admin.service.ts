@@ -8,7 +8,7 @@ const dynamoDb = getDynamodbConnection();
 export const adminService = new ServiceObject<Admin>({
   dynamoDb: dynamoDb,
   objectName: 'Admin',
-  table: `${process.env.ADMIN_TABLE}`,
+  table: `${process.env.APP_NAME}-${process.env.NODE_ENV}-admin`,
   primaryKey: 'userSub',
 });
 

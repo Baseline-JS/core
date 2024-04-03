@@ -105,9 +105,6 @@ const writeServerlessApiYaml = () => {
     table: `\${env:APP_NAME}-\${opt:stage}-${filenameName}`,
     sources: [`./src/baseblocks/${filenameName}/${filenameName}.seed.json`],
   });
-  yamlJson.provider.environment[
-    `${name.replace(/\s/g, '_').toUpperCase()}_TABLE`
-  ] = `\${env:APP_NAME}-\${opt:stage}-${filenameName}`;
 
   const yamlResult = YAML.dump(yamlJson, {
     schema,

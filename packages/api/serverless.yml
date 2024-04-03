@@ -69,10 +69,10 @@ provider:
   # by a route then the service will need to have access to the environment variables it needs. Environment variables
   # that should only ever be in a specific service route can be defined on the functions.[service].environment
   environment:
+    APP_NAME: ${env:APP_NAME}
     NODE_OPTIONS: --enable-source-maps # Lambda will report correct stacktrace location based on source maps
-    ENV: ${opt:stage}
+    NODE_ENV: ${opt:stage}
     API_REGION: ${opt:region}
-    ADMIN_TABLE: ${env:APP_NAME}-${opt:stage}-admin
     API_CORS_ORIGIN: ${self:custom.apiCorsOrigin}
     COGNITO_USER_POOL_ID:
       # 'ap-southeast-2_zADQdNgNo' # If manually specifying, format expected "ap-southeast-2_zADQdNgNo"
