@@ -2,6 +2,7 @@
   "name": "@baseline/web",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "deploy:staging": "./scripts/deploy.sh staging",
     "remove:staging": ". ../../scripts/project-variables.sh && npx serverless remove --stage staging --region $REGION",
