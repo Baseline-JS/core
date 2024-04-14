@@ -1,6 +1,6 @@
 # Baseline Core
 
-The Baseline Core is a fullstack serverless framework designed to help teams deliver value quickly, frequently, and consistently, while also ensuring safety throughout the entire process. Our framework utilizes a combination of modern technologies, architectures, software delivery practices, and operational processes to help teams build and deploy applications with ease.
+Baseline Core is a open source fullstack serverless framework designed to help teams deliver value quickly, frequently, and consistently, while also ensuring safety throughout the entire process. Our framework utilizes a combination of modern technologies, architectures, software delivery practices, and operational processes to help teams build and deploy applications with ease.
 
 # Getting Started
 
@@ -8,7 +8,7 @@ The Baseline Core is a fullstack serverless framework designed to help teams del
 
 These must be installed before following the setup instructions.
 
-- Macos or Linux OS
+- Macos/Linux OS/Windows Subsystem for Linux
   - Node.js v20 (v20 or higher) & npm@10.5.0 or higher [(we suggest installing and using nvm)](https://github.com/nvm-sh/nvm#install--update-script) follow instructions in the link to install, you will generally need to create a new terminal session after installing. If you already have nvm update it before proceeding.
     - If nvm is installed you can switch versions with `nvm install 20 && nvm use 20 && nvm alias default 20 && nvm install-latest-npm`
     - If not using nvm you can manually install node and npm, download from <https://nodejs.org/en/download/> alternatively use the operating system package manager or any other appropriate tool to install node
@@ -31,11 +31,9 @@ These must be installed before following the setup instructions.
 
 ## Setup
 
-To setup and begin using Baseline you will need to have it deployed to your AWS account. Follow the steps below to setup Baseline. This will also allow you to begin using Baseline locally for development.
-
 1. Install requirements
-2. Open a terminal and navigate to the root of the baseline folder
-3. Run `pnpm install`
+2. `npx @baselinejs/create-app my-app-name`
+3. `pnpm install`
 4. `pnpm run setup` to name your project and set the region
 5. `pnpm run aws:profile` to setup your AWS credentials profile (if you have issues please [update aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html]))
 6. `pnpm run deploy:staging` to deploy api/web/admin
