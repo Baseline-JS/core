@@ -443,4 +443,4 @@ It is recommended to follow the naming scheme used by the packages in the projec
 
 # Baseline
 
-If you would like to learn more about what we do please visit [Devika Baseline](https://baselinejs.com/)
+If you would like to learn more about what we do please visit [Baseline](https://baselinejs.com/)
