@@ -1,7 +1,6 @@
 {
   "name": "@baseline/admin",
   "version": "1.0.0",
-  "private": true,
   "type": "module",
   "scripts": {
     "deploy:staging": "./scripts/deploy.sh staging",
