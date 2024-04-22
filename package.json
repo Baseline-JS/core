@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "engines": {
     "node": ">=20",
-    "pnpm": ">=8"
+    "pnpm": ">=9"
   },
   "license": "MIT",
   "workspaces": [

@@ -13,6 +13,6 @@ npm config set unsafe-perm true
 
 npm --version
 
-npm install -g pnpm@8
+npm install -g pnpm@9
 
 echo "Finish: setup npm"
