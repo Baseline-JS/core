@@ -1,6 +1,6 @@
 {
   "name": "@baselinejs/core",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"
