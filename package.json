@@ -37,7 +37,8 @@
     "remove:prod": "pnpm --filter @baseline/api --filter @baseline/admin --filter @baseline/web --if-present --recursive --parallel run remove:prod",
     "start:api": "pnpm --filter @baseline/api run start",
     "start:admin": "pnpm --filter @baseline/admin run start",
-    "start:web": "pnpm --filter @baseline/web run start"
+    "start:web": "pnpm --filter @baseline/web run start",
+    "install:requirements": "./scripts/experimental-install-requirements.sh"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "7.2.0",

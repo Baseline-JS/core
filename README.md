@@ -29,6 +29,28 @@ These must be installed before following the setup instructions.
 - AWS Account <https://aws.amazon.com/getting-started/>
 - IAM credentials <https://docs.aws.amazon.com/cli/latest/userguide/getting-started-prereqs.html#getting-started-prereqs-iam> be sure to follow [Security best practices in IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)
 
+### Experimental Requirements Installation
+
+Alternatively, try the experimental requirements installation script. Use at your own risk.
+
+If you are starting a new Baseline project.
+
+```bash
+curl -o- https://raw.githubusercontent.com/Baseline-JS/core/main/scripts/experimental-install-requirements.sh | bash
+```
+
+or
+
+```bash
+wget -qO- https://raw.githubusercontent.com/Baseline-JS/core/main/scripts/experimental-install-requirements.sh | bash
+```
+
+If you are joining an existing Baseline project
+
+```bash
+pnpm run install:requirements
+```
+
 ## Setup
 
 1. Install requirements
