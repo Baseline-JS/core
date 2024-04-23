@@ -101,7 +101,7 @@ const writeServerlessApiYaml = () => {
     new CustomTag('!Sub', `\${${toCamelCase(name)}Table.Arn}`),
     new CustomTag('!Sub', `\${${toCamelCase(name)}Table.Arn}/index/*`),
   );
-  yamlJson.custom.dynamodb.seed.local.sources.push({
+  yamlJson.custom['serverless-dynamodb'].seed.local.sources.push({
     table: `\${env:APP_NAME}-\${opt:stage}-${filenameName}`,
     sources: [`./src/baseblocks/${filenameName}/${filenameName}.seed.json`],
   });
