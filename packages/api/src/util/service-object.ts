@@ -1,16 +1,14 @@
 import { getErrorMessage } from './error-message';
 import {
-  batchGet,
+  batchGetItems,
   deleteItem,
-  get,
-  getAll,
+  getItem,
+  getAllItems,
   putItem,
-  update,
-  dynamoDb,
-} from 'baseline-dynamodb';
+  updateItem,
+  DynamoDbDocumentClient,
+} from '@baselinejs/dynamodb';
 import { randomUUID } from 'crypto';
-
-type DynamoDbDocumentClient = typeof dynamoDb;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class ServiceObject<T extends Record<string, any>> {
@@ -40,7 +38,7 @@ export class ServiceObject<T extends Record<string, any>> {
       if (!this.dynamoDb) {
         throw new Error('DynamoDB not connected');
       }
-      return getAll<T>({
+      return getAllItems<T>({
         dynamoDb: this.dynamoDb,
         table: this.table,
       });
@@ -57,7 +55,7 @@ export class ServiceObject<T extends Record<string, any>> {
       if (!this.dynamoDb) {
         throw new Error('DynamoDB not connected');
       }
-      return await get<T>({
+      return await getItem<T>({
         dynamoDb: this.dynamoDb,
         table: this.table,
         key: {
@@ -112,7 +110,7 @@ export class ServiceObject<T extends Record<string, any>> {
           partial[key] = record[key];
         }
       });
-      return await update<T>({
+      return await updateItem<T>({
         dynamoDb: this.dynamoDb,
         table: this.table,
         key: {
@@ -136,8 +134,9 @@ export class ServiceObject<T extends Record<string, any>> {
       return await deleteItem({
         dynamoDb: this.dynamoDb,
         table: this.table,
-        keyName: this.primaryKey,
-        keyValue: keyValue,
+        key: {
+          [this.primaryKey]: keyValue,
+        },
       });
     } catch (error) {
       const message = getErrorMessage(error);
@@ -152,11 +151,15 @@ export class ServiceObject<T extends Record<string, any>> {
       if (!this.dynamoDb) {
         throw new Error('DynamoDB not connected');
       }
-      return await batchGet<T>({
+      const keys = ids.map((id) => {
+        return {
+          [this.primaryKey]: id,
+        };
+      });
+      return await batchGetItems<T>({
         dynamoDb: this.dynamoDb,
-        keyName: this.primaryKey,
+        keys: keys,
         table: this.table,
-        ids: ids,
       });
     } catch (error) {
       const message = getErrorMessage(error);

@@ -1,9 +1,11 @@
 import { Admin } from '@baseline/types/admin';
 import { getErrorMessage } from '../../util/error-message';
-import { getDynamodbConnection } from 'baseline-dynamodb';
+import { getDynamodbConnection } from '@baselinejs/dynamodb';
 import { ServiceObject } from '../../util/service-object';
 
-const dynamoDb = getDynamodbConnection();
+const dynamoDb = getDynamodbConnection({
+  region: `${process.env.API_REGION}`,
+});
 
 export const adminService = new ServiceObject<Admin>({
   dynamoDb: dynamoDb,
