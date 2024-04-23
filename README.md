@@ -2,6 +2,67 @@
 
 Baseline Core is a open source fullstack serverless framework designed to help teams deliver value quickly, frequently, and consistently, while also ensuring safety throughout the entire process. Our framework utilizes a combination of modern technologies, architectures, software delivery practices, and operational processes to help teams build and deploy applications with ease.
 
+If you like Baseline give us a ⭐️
+
+## Major Components
+
+- 🚀 API
+- 🖥️ React Admin Website
+- 🌐 React User Website
+- ⚙️ CI/CD
+- 🔧 Developer Tooling
+- 🔒 Authentication
+- 🔄 Multiple Environments
+- 💻 Run Locally
+- 🏗️ Infrastructure as Code (IaC)
+- 📦 Managed Environment Variables
+- ✨ Baseline Commands
+
+## Technology
+
+- 🎁 Package Management: Pnpm + Monorepo
+- 🔨 Language & Build: TypeScript + ESBuild
+- 🖼 Frontend: React + Vite
+- ⚙️ Backend: NodeJS + Express
+- 🎨 Linting & Formatting: Prettier + Eslint
+- 🏗 IaC: AWS + Serverless Framework
+- 🚀 Deploy: Local & Bitbucket CI/CD
+
+## AWS Services
+
+- Cognito
+- S3
+- Lambda
+- DynamoDB
+- CloudFormation
+- Route53
+- Systems Manager
+- CloudFront
+- API Gateway
+- CloudWatch
+- SNS
+
+## What can you build with Baseline?
+
+- 🌐 SaaS Solutions: Build software-as-a-service solutions tailored to your audience.
+- 🖥️ Web Applications: Develop responsive and scalable web applications.
+- 🛒 Marketplaces: Launch and manage online marketplaces with ease.
+- 📱 Mobile Applications: Create robust mobile apps for iOS and Android platforms.
+- 💼🛍️ B2B/B2C Applications: Seamlessly cater to both business and consumer audiences.
+- 🗄️ Headless CMS: Manage content efficiently using a headless content management system.
+
+## Benefits
+
+- Serverless First
+- Open source
+- Full control
+- Cost effective implementation
+- Hosted in your own AWS account
+- Uses popular technology
+- Scales on demand
+- Staging and production environments
+- Runs locally
+
 # Getting Started
 
 ## Local Requirements
