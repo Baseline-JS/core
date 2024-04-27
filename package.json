@@ -27,6 +27,7 @@
     "urls:staging": "./scripts/project-urls.sh staging",
     "urls:prod": "./scripts/project-urls.sh prod",
     "lint": "pnpm --if-present --recursive --parallel run lint",
+    "build": "pnpm --if-present --recursive --parallel run build",
     "pretty": "pnpm --if-present --recursive --parallel run pretty",
     "add:object": "pnpm --filter @baseline/add-object start",
     "add:user:staging": "pnpm --filter @baseline/api run add:user:staging",
