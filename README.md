@@ -1,3 +1,4 @@
+![1688515420018](https://github.com/Baseline-JS/core/assets/151841910/620fa869-4bca-418d-af2c-3a3f8b2d2719)
 # Baseline Core
 
 Baseline Core is a open source fullstack serverless framework designed to help teams deliver value quickly, frequently, and consistently, while also ensuring safety throughout the entire process. Our framework utilizes a combination of modern technologies, architectures, software delivery practices, and operational processes to help teams build and deploy applications with ease.
