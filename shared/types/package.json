@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "lint": "echo 'No linting'",
+    "lint": "npx eslint --config '.eslintrc.js' '**/*.{ts,tsx,js}'",
     "pretty": "npx prettier --write '*.{ts,tsx,d.ts,js,json,css,scss,md,yml,yaml,html}'"
   },
   "dependencies": {}
