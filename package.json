@@ -5,14 +5,18 @@
     "node": ">=20",
     "pnpm": ">=9"
   },
+  "homepage": "https://baselinejs.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Baseline-JS/core.git"
+  },
+  "author": "Baseline JS",
+  "description": "Baseline JS is a serverless first full-stack JavaScript framework for building modern web applications.",
   "license": "MIT",
   "workspaces": [
-    "packages/api",
-    "shared/client-api",
-    "shared/types",
-    "packages/web",
-    "packages/admin",
-    "commands/add-object"
+    "packages/*",
+    "shared/*",
+    "commands/*"
   ],
   "scripts": {
     "region": "./scripts/set-region.sh",
