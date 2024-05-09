@@ -1,7 +1,7 @@
 ![1688515420018](https://github.com/Baseline-JS/core/assets/151841910/620fa869-4bca-418d-af2c-3a3f8b2d2719)
 # Baseline Core
 
-Baseline Core is a open source fullstack serverless framework designed to help teams deliver value quickly, frequently, and consistently, while also ensuring safety throughout the entire process. Our framework utilizes a combination of modern technologies, architectures, software delivery practices, and operational processes to help teams build and deploy applications with ease.
+Baseline Core is an open-source fullstack serverless first framework designed to make building cloud native applications easier. Our framework utilizes a combination of modern technologies, architectures, software delivery practices, and operational processes to help teams build and deploy applications with ease.
 
 If you like Baseline give us a ⭐️
 
@@ -361,7 +361,7 @@ CloudFormation, Serverless, Serverless plugins and AWS CLI used during the deplo
 
 ## Architecture
 
-![Architecture.png](baseline-core-architecture.png)
+![Architecture.png](https://github.com/Baseline-JS/core/raw/main/baseline-core-architecture.png)
 
 ## Folder Structure
 
