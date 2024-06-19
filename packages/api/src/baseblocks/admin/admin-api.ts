@@ -11,6 +11,7 @@ import { getErrorMessage } from '../../util/error-message';
 import createApp from '../../util/express-app';
 import createAuthenticatedHandler from '../../util/create-authenticated-handler';
 import { adminService } from './admin.service';
+import { equal } from '../../util/filter';
 
 const app = createApp();
 // app.use(isAdmin); // All private endpoints require the user to be an admin
@@ -51,7 +52,7 @@ app.post('/admin', [
       }
 
       // do not attempt to create user if there is a db record for them already
-      const allAdmins = await adminService.getAll();
+      const allAdmins = await adminService.getAll([equal('userEmail', userEmail)]);
       const existingAdmin = allAdmins.find(
         (admin) => admin.userEmail === userEmail,
       );
