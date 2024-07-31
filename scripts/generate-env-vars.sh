@@ -27,6 +27,9 @@ fi
 if [ "$STACK_STAGE" == "local" ]; then
     OUTPUT_FILENAME=.env.development
     ServiceEndpoint=http://localhost:4000/local
+    if [ "$CODESPACE_NAME" ]; then
+        ServiceEndpoint="https://${CODESPACE_NAME}-4000.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}/local"
+    fi
 else
     OUTPUT_FILENAME=.env.production
 fi
