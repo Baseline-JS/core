@@ -16,6 +16,14 @@ Startups, want $10k USD of AWS Credits to Get Started? [Apply Here](https://shar
 
 # Getting Started
 
+# Videos Walkthroughs
+
+Video walkthroughs setting up Baseline
+
+- [Baseline Demo](https://www.youtube.com/watch?v=db5gxYWAf1E)
+- [Baseline with Windows Subsystem Linux](https://www.youtube.com/watch?v=sxrQxoibUgI)
+- [Baseline with GitHub Codespaces](https://www.youtube.com/watch?v=uvL9PxdijXA)
+
 ## Setup
 
 1. [Install requirements](#local-requirements) `pnpm run install:requirements`
@@ -125,7 +133,7 @@ To destroy the deployed cloudformation stacks so it is no longer on AWS run `pnp
 - ⚙️ Backend: NodeJS + Express
 - 🎨 Linting & Formatting: Prettier + Eslint
 - 🏗 IaC: AWS + Serverless Framework
-- 🚀 Deploy: Local & Bitbucket CI/CD
+- 🚀 Deploy: Local/Bitbucket/GitHub CI/CD
 
 ## AWS Services
 
