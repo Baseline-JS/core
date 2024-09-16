@@ -1,5 +1,5 @@
 import { createAdmin } from '@baseline/client-api/admin';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import {
   FormGroup,
   Input,
@@ -10,12 +10,15 @@ import {
   ModalHeader,
 } from 'reactstrap';
 import { getRequestHandler } from '@baseline/client-api/request-handler';
-import { AdminContext } from '../util/AdminContext';
 import styles from './AddAdmin.module.scss';
+import { Admin } from '@baseline/types/admin';
 
-const AddAdmin = () => {
-  const { setAllAdmins } = useContext(AdminContext);
+interface Props {
+  setAllAdmins: React.Dispatch<React.SetStateAction<Admin[]>>;
+}
 
+const AddAdmin = (props: Props) => {
+  const { setAllAdmins } = props;
   const [newEmail, setNewEmail] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggle = () => {
