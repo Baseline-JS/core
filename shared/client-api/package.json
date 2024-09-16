@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "@baseline/types": "workspace:1.0.0",
-    "axios": "1.6.7"
+    "axios": "1.7.7"
   }
 }
