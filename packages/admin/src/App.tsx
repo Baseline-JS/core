@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Amplify } from 'aws-amplify';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
@@ -58,12 +58,10 @@ export default function App() {
   }, []);
 
   return (
-    <Suspense fallback={<Loader hasStartedLoading={true} />}>
-      <RouterProvider
-        router={router}
-        fallbackElement={<Loader hasStartedLoading={true} />}
-      />
-    </Suspense>
+    <RouterProvider
+      router={router}
+      fallbackElement={<Loader hasStartedLoading={true} />}
+    />
   );
 }
 
@@ -80,6 +78,10 @@ async function protectedLoader() {
       },
     );
   }
+
+  // sleep 1 second to show loader
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   const authSession = await fetchAuthSession();
   if (!authSession?.tokens?.idToken) {
     return redirect('/login');
