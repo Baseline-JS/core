@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Amplify } from 'aws-amplify';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
@@ -11,18 +11,18 @@ import {
 } from 'react-router-dom';
 import '@aws-amplify/ui-react/styles.css';
 import Dashboard from './baseblocks/dashboard/pages/Dashboard';
-import User from './baseblocks/user/pages/User';
-import Admins from './baseblocks/admin/pages/Admins';
+import User, { userLoader } from './baseblocks/user/pages/User';
+import Admins, { adminListLoader } from './baseblocks/admin/pages/Admins';
 import {
   createRequestHandler,
   getRequestHandler,
 } from '@baseline/client-api/request-handler';
 import { AxiosRequestConfig } from 'axios';
 import Home from './baseblocks/home/pages/Home';
-import Loader from './components/page-content/loader/Loader';
 import Login from './baseblocks/login/pages/Login';
 import NotAdmin from './baseblocks/not-admin/pages/NotAdmin';
 import Layout from './components/layout/Layout';
+import Loader from './components/page-content/loader/Loader';
 
 Amplify.configure({
   Auth: {
@@ -58,10 +58,12 @@ export default function App() {
   }, []);
 
   return (
-    <RouterProvider
-      router={router}
-      fallbackElement={<Loader isLoading={true} hasStartedLoading={true} />}
-    />
+    <Suspense fallback={<Loader hasStartedLoading={true} />}>
+      <RouterProvider
+        router={router}
+        fallbackElement={<Loader hasStartedLoading={true} />}
+      />
+    </Suspense>
   );
 }
 
@@ -117,8 +119,12 @@ const router = createBrowserRouter([
     loader: protectedLoader,
     children: [
       { path: '/dashboard', Component: Dashboard },
-      { path: '/admins', Component: Admins },
-      { path: '/settings', Component: User },
+      {
+        path: '/admins',
+        Component: Admins,
+        loader: adminListLoader,
+      },
+      { path: '/settings', Component: User, loader: userLoader },
     ],
   },
 ]);

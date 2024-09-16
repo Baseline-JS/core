@@ -1,36 +1,17 @@
-import React, { useContext, useEffect } from 'react';
-import { deleteAdmin, getAllAdmins } from '@baseline/client-api/admin';
+import React, { useState } from 'react';
+import { deleteAdmin } from '@baseline/client-api/admin';
 import ConfirmDelete from '../../../../components/confirm-delete/ConfirmDelete';
 import AddUser from '../add-admin/AddAdmin';
-import { AdminContext } from '../util/AdminContext';
 import styles from './AdminList.module.scss';
 import { getRequestHandler } from '@baseline/client-api/request-handler';
+import { Admin } from '@baseline/types/admin';
 
 interface Props {
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  admins: Admin[];
 }
 
 const AdminList = (props: Props): JSX.Element => {
-  const { allAdmins, setAllAdmins } = useContext(AdminContext);
-  const { setIsLoading } = props;
-
-  useEffect(() => {
-    void (async () => {
-      try {
-        setIsLoading(true);
-        const admins = await getAllAdmins(getRequestHandler());
-        setAllAdmins(admins);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-        setIsLoading(false);
-      }
-    })();
-    return () => {
-      setAllAdmins([]);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setAllAdmins]);
+  const [allAdmins, setAllAdmins] = useState<Admin[]>(props?.admins || []);
 
   const handleDelete = async (adminSub: string): Promise<void> => {
     await deleteAdmin(getRequestHandler(), { adminId: adminSub });
@@ -46,7 +27,7 @@ const AdminList = (props: Props): JSX.Element => {
           <div className={styles.userCount}>
             There are {allAdmins.length} people in your team
           </div>
-          <AddUser />
+          <AddUser setAllAdmins={setAllAdmins} />
         </div>
         {allAdmins.map((admin) => (
           <div key={admin.userSub} className={styles.admin}>
