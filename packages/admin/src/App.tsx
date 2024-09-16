@@ -78,10 +78,6 @@ async function protectedLoader() {
       },
     );
   }
-
-  // sleep 1 second to show loader
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
   const authSession = await fetchAuthSession();
   if (!authSession?.tokens?.idToken) {
     return redirect('/login');
