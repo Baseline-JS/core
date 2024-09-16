@@ -4,36 +4,22 @@ import {
   confirmUserAttribute,
   fetchUserAttributes,
 } from 'aws-amplify/auth';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FormFeedback, FormGroup, Input, Label } from 'reactstrap';
 import styles from './UserSettings.module.scss';
 
 interface Props {
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  user: { email: string; email_verified: boolean };
 }
 
 const UserSettings = (props: Props): JSX.Element => {
-  const [email, setEmail] = useState<string>('');
+  const [email, setEmail] = useState<string>(props?.user?.email);
   const [isChangingEmail, setIsChangingEmail] = useState(false);
-  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [isEmailVerified, setIsEmailVerified] = useState(
+    props?.user?.email_verified,
+  );
   const [isCodeInvalid, setIsCodeInvalid] = useState<undefined | boolean>();
   const [changingEmailCode, setChangingEmailCode] = useState('');
-  const { setIsLoading } = props;
-
-  const getUserDetails = async () => {
-    const { email, email_verified } = await fetchUserAttributes();
-    setEmail(email);
-    setIsEmailVerified(email_verified !== 'false');
-  };
-
-  useEffect(() => {
-    void (async () => {
-      setIsLoading(true);
-      await getUserDetails();
-      setIsLoading(false);
-    })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleEmailChange = async () => {
     const attributes = await fetchUserAttributes();
