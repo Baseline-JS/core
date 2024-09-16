@@ -7,6 +7,7 @@ import {
   putItem,
   updateItem,
   DynamoDbDocumentClient,
+  ConditionExpressionArgs,
 } from '@baselinejs/dynamodb';
 import { randomUUID } from 'crypto';
 
@@ -32,7 +33,7 @@ export class ServiceObject<T extends Record<string, any>> {
     this.ownerField = params.ownerField;
   }
 
-  async getAll(): Promise<T[]> {
+  async getAll(filterConditions? : ConditionExpressionArgs[]): Promise<T[]> {
     console.log(`Get all ${this.objectName} records`);
     try {
       if (!this.dynamoDb) {
@@ -41,6 +42,7 @@ export class ServiceObject<T extends Record<string, any>> {
       return getAllItems<T>({
         dynamoDb: this.dynamoDb,
         table: this.table,
+        filterConditions
       });
     } catch (error) {
       const message = getErrorMessage(error);
