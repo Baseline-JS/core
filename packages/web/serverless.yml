@@ -14,6 +14,10 @@ custom:
     - distributionIdKey: 'CDNDistributionId'
       items:
         - '/*'
+  # domain:
+  #   local: "local.baselinejs.com"
+  #   staging: "staging.baselinejs.com"
+  #   prod: "baselinejs.com"
 
 provider:
   name: aws
@@ -110,7 +114,7 @@ resources:
           Enabled: true
           ## [Custom Domain] Add the domain alias
           # Aliases:
-          # - mysite.example.com
+          # - ${self:custom.domain.${opt:stage}}
           DefaultRootObject: 'index.html'
           ## Since the Single Page App is taking care of the routing we need to make sure ever path is served with index.html
           ## The only exception are files that actually exist e.h. app.js, reset.css
@@ -143,9 +147,10 @@ resources:
           ViewerCertificate:
             CloudFrontDefaultCertificate: true
             ## [Custom Domain] Stop using the cloudfront default certificate, uncomment below and add ACM Certificate ARN
-            # CloudFrontDefaultCertificate: false
-            # ACMCertificateArn: "" # ARN of the AWS certificate
-            # MinimumProtocolVersion: "TLSv1.2_2021"
+            # MinimumProtocolVersion: TLSv1.2_2021
+            # SslSupportMethod: sni-only
+            # AcmCertificateArn: arn:aws:acm:us-east-1:xxxxxxxxxxxx:certificate/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx # ARN of the AWS certificate
+
           ## Uncomment the following section in case you want to enable logging for CloudFront requests
           # Logging:
           #   IncludeCookies: 'false'
