@@ -52,6 +52,10 @@ install_aws_cli() {
 }
 
 install_homebrew() {
+  if [ "$OS" != "mac" ]; then
+    return 0
+  fi
+
   if command -v brew >/dev/null 2>&1; then
     echo "Homebrew is already installed."
     return 0
@@ -106,18 +110,74 @@ install_java() {
 OS="unknown"
 if [ "$(uname)" == "Darwin" ]; then
   OS="mac"
-  install_homebrew
 elif [ -f "/etc/redhat-release" ]; then
   OS="linux"
 elif [ -f "/etc/debian_version" ]; then
   OS="linux"
 fi
 
-install_curl
-install_node
-install_aws_cli
-install_jq $OS
-install_java $OS
+usage() {
+  echo "Usage: $0 [-f function]"
+  echo "Available functions:"
+  echo "  all      Install all dependencies"
+  echo "  brew     Install Homebrew"
+  echo "  curl     Install curl"
+  echo "  node     Install Node.js and NVM"
+  echo "  aws      Install AWS CLI"
+  echo "  jq       Install jq"
+  echo "  java     Install Java"
+  exit 1
+}
 
-echo "Installation complete. Please verify the installation by checking the versions of the installed software."
-echo "Open a new terminal session to start using everything."
+while getopts "f:" opt; do
+  case ${opt} in
+    f)
+      FUNCTION=$OPTARG
+      ;;
+    *)
+      usage
+      ;;
+  esac
+done
+
+if [ -z "$FUNCTION" ]; then
+  # Default to running all
+  FUNCTION="all"
+fi
+
+case $FUNCTION in
+  brew)
+    install_homebrew
+    ;;
+  curl)
+    install_curl
+    ;;
+  node)
+    install_node
+    ;;
+  node-version)
+    get_node_version
+    ;;
+  aws)
+    install_aws_cli
+    ;;
+  jq)
+    install_jq $OS
+    ;;
+  java)
+    install_java $OS
+    ;;
+  all)
+    install_homebrew
+    install_curl
+    install_node
+    install_aws_cli
+    install_jq $OS
+    install_java $OS
+    echo "Installation complete. Please verify the installation by checking the versions of the installed software."
+    echo "Open a new terminal session to start using everything."
+    ;;
+  *)
+    usage
+    ;;
+esac
