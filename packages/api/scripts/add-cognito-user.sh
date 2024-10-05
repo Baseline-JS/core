@@ -10,6 +10,8 @@ PARENT_PATH="$(
 cd "$PARENT_PATH" || exit
 
 STAGE=$1
+USER_EMAIL=$2
+USER_PASSWORD=$3
 
 # Sets REGION, APP_NAME, AWS_REGION, AWS_PROFILE
 . ../../scripts/project-variables.sh
@@ -27,25 +29,29 @@ else
   echo "Cognito Pool Id [$COGNITO_USER_POOL_ID]"
 fi
 
-printf "Email: "
-read -r USER_EMAIL
+if [ -z "$USER_EMAIL" ]; then
+  printf "Email: "
+  read -r USER_EMAIL
+fi
 
 if [ "$USER_EMAIL" == "" ]; then
   echo "Error: No user email set"
   exit 1
 fi
 
-echo
-echo "Password Requirements:"
-echo "- 8 character minimum length"
-echo "- Contains at least 1 number"
-echo "- Contains at least 1 lowercase letter"
-echo "- Contains at least 1 uppercase letter"
-echo "- Contains at least 1 special character"
+if [ -z "$USER_PASSWORD" ]; then
+  echo
+  echo "Password Requirements:"
+  echo "- 8 character minimum length"
+  echo "- Contains at least 1 number"
+  echo "- Contains at least 1 lowercase letter"
+  echo "- Contains at least 1 uppercase letter"
+  echo "- Contains at least 1 special character"
 
-printf "Password: "
-read -sr USER_PASSWORD
-echo ""
+  printf "Password: "
+  read -sr USER_PASSWORD
+  echo ""
+fi
 
 if [ "$USER_PASSWORD" == "" ]; then
   echo "Error: No user password set"
