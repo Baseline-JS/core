@@ -47,13 +47,21 @@ $animationSpeed: 250ms;
     }
   }
 
-  img {
+  .logo {
+    margin-bottom: 48px;
     height: 40px;
+    max-height: 50px;
+    max-width: 200px;
     object-fit: contain;
   }
 
   .links {
     margin-top: 48px;
+
+    img {
+      height: 40px;
+      object-fit: contain;
+    }
 
     .spacer {
       height: 20px;

@@ -38,6 +38,8 @@ $mobileNavPadding: 24px 48px;
       img {
         width: 100%;
         height: $navHeight;
+        max-height: $navHeight;
+        max-width: 250px;
         object-fit: contain;
       }
 

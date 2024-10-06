@@ -20,7 +20,7 @@ const Sidebar = (): JSX.Element => {
           setIsToggled((toggled) => !toggled);
         }}
       ></div>
-      <img src="/logo.png" alt="Baseline" />
+      <img className={styles.logo} src="/logo.png" alt="Baseline" />
 
       <div className={styles.links}>
         <Link
