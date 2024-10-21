@@ -52,6 +52,7 @@
     "eslint-config-prettier": "9.1.0"
   },
   "resolutions": {
-    "fast-xml-parser": "4.4.1"
+    "fast-xml-parser": "4.4.1",
+    "braces": "3.0.3"
   }
 }
