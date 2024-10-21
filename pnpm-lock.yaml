@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  fast-xml-parser: 4.4.1
+
 importers:
 
   .:
@@ -104,13 +107,13 @@ importers:
         version: 1.43.4
       serverless:
         specifier: 3.38.0
-        version: 3.38.0(@aws-sdk/credential-provider-node@3.535.0)
+        version: 3.38.0(@aws-sdk/credential-provider-node@3.675.0(@aws-sdk/client-sts@3.675.0))
       serverless-baseline-invalidate-cloudfront:
         specifier: 0.1.1
         version: 0.1.1
       serverless-s3-sync:
         specifier: 3.1.0
-        version: 3.1.0(serverless@3.38.0(@aws-sdk/credential-provider-node@3.535.0))
+        version: 3.1.0(serverless@3.38.0(@aws-sdk/credential-provider-node@3.675.0(@aws-sdk/client-sts@3.675.0)))
       stylelint:
         specifier: 16.2.1
         version: 16.2.1(typescript@5.4.2)
@@ -3375,14 +3378,6 @@ packages:
   fast-safe-stringify@2.1.1:
     resolution: {integrity: sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==}
 
-  fast-xml-parser@4.2.5:
-    resolution: {integrity: sha512-B9/wizE4WngqQftFPmdaMYlXoJlJOYxGQOanC77fq9k8+Z0v5dDSVh+3glErdIROP//s/jgb7ZuxKfB8nVyo0g==}
-    hasBin: true
-
-  fast-xml-parser@4.3.5:
-    resolution: {integrity: sha512-sWvP1Pl8H03B8oFJpFR3HE31HUfwtX7Rlf9BNsvdpujD4n7WMhfmu8h9wOV2u+c1k0ZilTADhPqypzx2J690ZQ==}
-    hasBin: true
-
   fast-xml-parser@4.4.1:
     resolution: {integrity: sha512-xkjOecfnKGkSsOwtZ5Pz7Us/T6mrbPQrq0nh+aCO5V9nk5NLWmasAHumTKjiPJPWANe+kAZ84Jc8ooJkzZ88Sw==}
     hasBin: true
@@ -5814,7 +5809,7 @@ snapshots:
       '@aws-sdk/types': 3.398.0
       '@smithy/md5-js': 2.0.7
       buffer: 4.9.2
-      fast-xml-parser: 4.3.5
+      fast-xml-parser: 4.4.1
       tslib: 2.6.2
 
   '@aws-amplify/ui-react-core@3.0.28(@aws-amplify/core@6.0.20)(@types/react@18.2.67)(aws-amplify@6.0.20)(react@18.2.0)':
@@ -6589,7 +6584,7 @@ snapshots:
       '@smithy/util-defaults-mode-node': 2.3.0
       '@smithy/util-retry': 2.2.0
       '@smithy/util-utf8': 2.3.0
-      fast-xml-parser: 4.2.5
+      fast-xml-parser: 4.4.1
       tslib: 2.6.2
     transitivePeerDependencies:
       - aws-crt
@@ -6822,7 +6817,7 @@ snapshots:
       '@smithy/signature-v4': 2.2.0
       '@smithy/smithy-client': 2.5.0
       '@smithy/types': 2.12.0
-      fast-xml-parser: 4.2.5
+      fast-xml-parser: 4.4.1
       tslib: 2.6.2
 
   '@aws-sdk/core@3.535.0':
@@ -6832,7 +6827,7 @@ snapshots:
       '@smithy/signature-v4': 2.2.0
       '@smithy/smithy-client': 2.5.0
       '@smithy/types': 2.12.0
-      fast-xml-parser: 4.2.5
+      fast-xml-parser: 4.4.1
       tslib: 2.6.2
 
   '@aws-sdk/core@3.667.0':
@@ -8559,40 +8554,6 @@ snapshots:
     dependencies:
       '@aws-sdk/client-cloudformation': 3.536.0
       '@aws-sdk/client-sts': 3.535.0(@aws-sdk/credential-provider-node@3.533.0)
-      '@serverless/event-mocks': 1.1.1
-      '@serverless/platform-client': 4.5.1(supports-color@8.1.1)
-      '@serverless/utils': 6.15.0
-      child-process-ext: 3.0.2
-      chokidar: 3.6.0
-      flat: 5.0.2
-      fs-extra: 9.1.0
-      js-yaml: 4.1.0
-      jszip: 3.10.1
-      lodash: 4.17.21
-      memoizee: 0.4.15
-      ncjsm: 4.3.2
-      node-dir: 0.1.17
-      node-fetch: 2.7.0
-      open: 7.4.2
-      semver: 7.6.0
-      simple-git: 3.23.0(supports-color@8.1.1)
-      timers-ext: 0.1.7
-      type: 2.7.2
-      uuid: 8.3.2
-      yamljs: 0.3.0
-    transitivePeerDependencies:
-      - '@aws-sdk/credential-provider-node'
-      - aws-crt
-      - bufferutil
-      - debug
-      - encoding
-      - supports-color
-      - utf-8-validate
-
-  '@serverless/dashboard-plugin@7.2.3(@aws-sdk/credential-provider-node@3.535.0)(supports-color@8.1.1)':
-    dependencies:
-      '@aws-sdk/client-cloudformation': 3.536.0
-      '@aws-sdk/client-sts': 3.535.0(@aws-sdk/credential-provider-node@3.535.0)
       '@serverless/event-mocks': 1.1.1
       '@serverless/platform-client': 4.5.1(supports-color@8.1.1)
       '@serverless/utils': 6.15.0
@@ -10898,14 +10859,6 @@ snapshots:
 
   fast-safe-stringify@2.1.1: {}
 
-  fast-xml-parser@4.2.5:
-    dependencies:
-      strnum: 1.0.5
-
-  fast-xml-parser@4.3.5:
-    dependencies:
-      strnum: 1.0.5
-
   fast-xml-parser@4.4.1:
     dependencies:
       strnum: 1.0.5
@@ -12530,14 +12483,6 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  serverless-s3-sync@3.1.0(serverless@3.38.0(@aws-sdk/credential-provider-node@3.535.0)):
-    dependencies:
-      '@auth0/s3': 1.0.0
-      bluebird: 3.7.2
-      mime: 2.6.0
-      minimatch: 3.1.2
-      serverless: 3.38.0(@aws-sdk/credential-provider-node@3.535.0)
-
   serverless-s3-sync@3.1.0(serverless@3.38.0(@aws-sdk/credential-provider-node@3.675.0(@aws-sdk/client-sts@3.675.0))):
     dependencies:
       '@auth0/s3': 1.0.0
@@ -12549,72 +12494,6 @@ snapshots:
   serverless@3.38.0(@aws-sdk/credential-provider-node@3.533.0):
     dependencies:
       '@serverless/dashboard-plugin': 7.2.3(@aws-sdk/credential-provider-node@3.533.0)(supports-color@8.1.1)
-      '@serverless/platform-client': 4.5.1(supports-color@8.1.1)
-      '@serverless/utils': 6.15.0
-      abort-controller: 3.0.0
-      ajv: 8.12.0
-      ajv-formats: 2.1.1(ajv@8.12.0)
-      archiver: 5.3.2
-      aws-sdk: 2.1580.0
-      bluebird: 3.7.2
-      cachedir: 2.4.0
-      chalk: 4.1.2
-      child-process-ext: 2.1.1
-      ci-info: 3.9.0
-      cli-progress-footer: 2.3.3
-      d: 1.0.2
-      dayjs: 1.11.10
-      decompress: 4.2.1
-      dotenv: 16.4.5
-      dotenv-expand: 10.0.0
-      essentials: 1.2.0
-      ext: 1.7.0
-      fastest-levenshtein: 1.0.16
-      filesize: 10.1.0
-      fs-extra: 10.1.0
-      get-stdin: 8.0.0
-      globby: 11.1.0
-      graceful-fs: 4.2.11
-      https-proxy-agent: 5.0.1(supports-color@8.1.1)
-      is-docker: 2.2.1
-      js-yaml: 4.1.0
-      json-colorizer: 2.2.2
-      json-cycle: 1.5.0
-      json-refs: 3.0.15(supports-color@8.1.1)
-      lodash: 4.17.21
-      memoizee: 0.4.15
-      micromatch: 4.0.5
-      node-fetch: 2.7.0
-      npm-registry-utilities: 1.0.0
-      object-hash: 3.0.0
-      open: 8.4.2
-      path2: 0.1.0
-      process-utils: 4.0.0
-      promise-queue: 2.2.5
-      require-from-string: 2.0.2
-      semver: 7.6.0
-      signal-exit: 3.0.7
-      stream-buffers: 3.0.2
-      strip-ansi: 6.0.1
-      supports-color: 8.1.1
-      tar: 6.2.0
-      timers-ext: 0.1.7
-      type: 2.7.2
-      untildify: 4.0.0
-      uuid: 9.0.1
-      ws: 7.5.9
-      yaml-ast-parser: 0.0.43
-    transitivePeerDependencies:
-      - '@aws-sdk/credential-provider-node'
-      - aws-crt
-      - bufferutil
-      - debug
-      - encoding
-      - utf-8-validate
-
-  serverless@3.38.0(@aws-sdk/credential-provider-node@3.535.0):
-    dependencies:
-      '@serverless/dashboard-plugin': 7.2.3(@aws-sdk/credential-provider-node@3.535.0)(supports-color@8.1.1)
       '@serverless/platform-client': 4.5.1(supports-color@8.1.1)
       '@serverless/utils': 6.15.0
       abort-controller: 3.0.0
