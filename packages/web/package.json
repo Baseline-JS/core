@@ -21,14 +21,14 @@
   "dependencies": {
     "@baseline/client-api": "workspace:1.0.0",
     "@baseline/types": "workspace:1.0.0",
-    "@vitejs/plugin-react": "4.2.1",
+    "@vitejs/plugin-react": "4.3.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-helmet": "6.1.0",
     "react-router-dom": "6.22.3",
     "reactstrap": "9.2.2",
     "typescript": "5.4.2",
-    "vite": "5.1.7",
+    "vite": "5.4.9",
     "vite-plugin-environment": "1.1.3"
   },
   "devDependencies": {
