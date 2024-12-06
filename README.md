@@ -24,7 +24,26 @@ Video walkthroughs setting up Baseline
 - [Baseline with Windows Subsystem Linux](https://www.youtube.com/watch?v=sxrQxoibUgI)
 - [Baseline with GitHub Codespaces](https://www.youtube.com/watch?v=uvL9PxdijXA)
 
+# Setup
+
+## Quick Start
+
+`npx @baselinejs/quickstart`
+
+The quick start command will:
+
+- Install all requirements
+- Create a new Baseline project
+- Set up AWS credentials
+- Deploy to staging
+- Create an admin user
+- Output the URLs for the project
+
+You may need to install npm if npx is not available, you can do this by installing [Node.js](https://nodejs.org/en/download/)
+
 ## Setup
+
+If you prefer a more manual setup, follow the steps below.
 
 1. [Install requirements](#local-requirements) `pnpm run install:requirements`
 2. `npx @baselinejs/create-app my-app-name`
