@@ -1,6 +1,6 @@
 {
   "name": "@baselinejs/core",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"
@@ -46,9 +46,9 @@
     "install:requirements": "./scripts/experimental-install-requirements.sh"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "7.2.0",
-    "@typescript-eslint/parser": "7.2.0",
-    "eslint": "8.57.0",
+    "@typescript-eslint/eslint-plugin": "8.17.0",
+    "@typescript-eslint/parser": "8.17.0",
+    "eslint": "9.16.0",
     "eslint-config-prettier": "9.1.0"
   },
   "resolutions": {
