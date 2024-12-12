@@ -56,7 +56,7 @@ If you prefer a more manual setup, follow the steps below.
 
 ## Local Requirements
 
-These must be installed before following the setup instructions.
+These must be installed before following the setup instructions. These can be installed manually or by using the requirements installation script.
 
 - Macos/Linux OS/Windows Subsystem for Linux
   - Node.js v20 (v20 or higher) & npm@10.5.0 or higher [(we suggest installing and using nvm)](https://github.com/nvm-sh/nvm#install--update-script) follow instructions in the link to install, you will generally need to create a new terminal session after installing. If you already have nvm update it before proceeding.
@@ -79,23 +79,23 @@ These must be installed before following the setup instructions.
 - AWS Account <https://aws.amazon.com/getting-started/>
 - IAM credentials <https://docs.aws.amazon.com/cli/latest/userguide/getting-started-prereqs.html#getting-started-prereqs-iam> be sure to follow [Security best practices in IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)
 
-### Experimental Requirements Installation
+### Requirements Installation
 
-Alternatively, try the experimental requirements installation script. Use at your own risk.
+Run the following command to install the requirements.
 
 If you are starting a new Baseline project.
 
 ```bash
-curl -o- https://raw.githubusercontent.com/Baseline-JS/core/main/scripts/experimental-install-requirements.sh | bash
+curl -o- https://raw.githubusercontent.com/Baseline-JS/core/main/scripts/install-requirements.sh | bash
 ```
 
 or
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/Baseline-JS/core/main/scripts/experimental-install-requirements.sh | bash
+wget -qO- https://raw.githubusercontent.com/Baseline-JS/core/main/scripts/install-requirements.sh | bash
 ```
 
-If you are joining an existing Baseline project
+If you are joining an existing Baseline project make sure you run the requirements installation script in the root of the project. This will install the requirements for the project.
 
 ```bash
 pnpm run install:requirements

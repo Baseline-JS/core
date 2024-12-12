@@ -43,7 +43,7 @@
     "start:api": "pnpm --filter @baseline/api run start",
     "start:admin": "pnpm --filter @baseline/admin run start",
     "start:web": "pnpm --filter @baseline/web run start",
-    "install:requirements": "./scripts/experimental-install-requirements.sh"
+    "install:requirements": "./scripts/install-requirements.sh"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "8.17.0",
