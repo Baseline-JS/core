@@ -1,6 +1,7 @@
 {
   "name": "@baseline/web",
   "version": "1.0.0",
+  "private": true,
   "type": "commonjs",
   "scripts": {
     "deploy:staging": "./scripts/deploy.sh staging",
