@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "lint": "npx eslint --config '.eslintrc.js' '**/*.{ts,tsx,js}'",
+    "lint": "npx eslint '*.ts'",
     "pretty": "npx prettier --write '*.{ts,tsx,d.ts,js,json,css,scss,md,yml,yaml,html}'"
-  },
-  "dependencies": {}
+  }
 }

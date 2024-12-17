@@ -9,7 +9,8 @@ interface Props {
 const Loader = (props: Props): JSX.Element => {
   const [isLoadingTextShowing, setIsLoadingTextShowing] = useState(false);
   const [isLoaderShowing, setIsLoaderShowing] = useState(false);
-  const [loadingTimeout, setLoadingTimeout] = useState<unknown>();
+  const [loadingTimeout, setLoadingTimeout] =
+    useState<ReturnType<typeof setTimeout>>();
   const { isLoading, hasStartedLoading } = props;
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const Loader = (props: Props): JSX.Element => {
     if (hasStartedLoading && !isLoading) {
       setIsLoadingTextShowing(false);
       setIsLoaderShowing(false);
-      clearTimeout(loadingTimeout as NodeJS.Timeout);
+      clearTimeout(loadingTimeout);
     }
   }, [hasStartedLoading, isLoading, loadingTimeout]);
 

@@ -16,7 +16,7 @@
     "generate:env:local": "pnpm -w run generate:env:local",
     "generate:env:staging": "pnpm -w run generate:env:staging",
     "generate:env:prod": "pnpm -w run generate:env:prod",
-    "lint": "npx stylelint --config '.stylelintrc.json' 'src/**/*.scss' && npx eslint --config '.eslintrc.js' 'src/**/*.{ts,tsx,js}'",
+    "lint": "npx stylelint --config '.stylelintrc.json' 'src/**/*.scss' && npx eslint 'src/**/*.{ts,tsx,jsx,js}'",
     "pretty": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}' && npx prettier --write 'public/**/*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}' && npx prettier --write '*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}'"
   },
   "dependencies": {
@@ -40,7 +40,7 @@
     "@types/react": "18.2.67",
     "@types/react-dom": "18.2.22",
     "eslint-plugin-react": "7.37.2",
-    "eslint-plugin-react-hooks": "5.0.0",
+    "eslint-plugin-react-hooks": "5.1.0",
     "postcss": "8.4.35",
     "postcss-scss": "4.0.9",
     "prettier": "2.4.1",
