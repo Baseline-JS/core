@@ -8,9 +8,15 @@ import reactHooks from 'eslint-plugin-react-hooks';
 
 export default [
   ...rootConfig,
+  react.configs.flat.recommended,
   {
     files: ['src/**/*.{ts,tsx,jsx,js}'],
     ignores: ['src/vite-env.d.ts', 'src/react-app-env.d.ts'],
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -18,19 +24,19 @@ export default [
       },
       globals: {
         ...globals.browser,
-        ...globals.serviceworker,
         JSX: 'readonly',
         process: 'readonly',
       },
     },
     plugins: {
       react,
-      reactHooks,
+      'react-hooks': reactHooks,
     },
     rules: {
       ...js.configs.recommended.rules,
       ...tsPlugin.configs.recommended.rules,
       ...tsPlugin.configs['recommended-requiring-type-checking'].rules,
+      ...reactHooks.configs.recommended.rules,
     },
   },
 ];
