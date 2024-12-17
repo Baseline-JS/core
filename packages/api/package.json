@@ -20,7 +20,7 @@
     "add:user:staging": "./scripts/add-cognito-user.sh staging",
     "add:user:prod": "./scripts/add-cognito-user.sh prod",
     "install:dynamodb": ". ../../scripts/project-variables.sh && npx serverless dynamodb install --stage staging --region $REGION",
-    "lint": "npx eslint --config '.eslintrc.js' 'src/**/*.{ts,tsx,js}'",
+    "lint": "npx eslint 'src/**/*.{ts,js}'",
     "build": ". ../../scripts/project-variables.sh && npx serverless package --stage staging --region $REGION",
     "pretty": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md,yml,yaml,html}' && npx prettier --write '*.{yml,yaml,js}'"
   },

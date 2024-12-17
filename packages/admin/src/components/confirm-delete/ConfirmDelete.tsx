@@ -12,7 +12,7 @@ import styles from './ConfirmDelete.module.scss';
 
 interface Props {
   itemName: string;
-  deleteFunction(): Promise<void>;
+  deleteFunction(this: void): Promise<void>;
   deleteString?: string;
   buttonProps?: React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
