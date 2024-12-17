@@ -51,7 +51,8 @@
     "@typescript-eslint/parser": "8.18.1",
     "eslint": "9.17.0",
     "eslint-config-prettier": "9.1.0",
-    "globals": "15.13.0"
+    "globals": "15.13.0",
+    "typescript-eslint": "8.18.1"
   },
   "resolutions": {
     "fast-xml-parser": "4.4.1"
