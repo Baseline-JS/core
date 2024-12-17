@@ -28,10 +28,9 @@ Amplify.configure({
   Auth: {
     Cognito: {
       signUpVerificationMethod: 'code',
-      identityPoolId: process.env.REACT_APP_COGNITO_IDENTITY_POOL_ID || '',
-      userPoolId: process.env.REACT_APP_COGNITO_USER_POOL_ID || '',
-      userPoolClientId:
-        process.env.REACT_APP_COGNITO_USER_POOL_WEB_CLIENT_ID || '',
+      identityPoolId: `${process.env.REACT_APP_COGNITO_IDENTITY_POOL_ID}`,
+      userPoolId: `${process.env.REACT_APP_COGNITO_USER_POOL_ID}`,
+      userPoolClientId: `${process.env.REACT_APP_COGNITO_USER_POOL_WEB_CLIENT_ID}`,
     },
   },
 });
@@ -73,7 +72,7 @@ async function protectedLoader() {
       async (config: AxiosRequestConfig): Promise<AxiosRequestConfig> => {
         const authSession = await fetchAuthSession();
         if (!config.headers) config.headers = {};
-        config.headers.Authorization = `Bearer ${authSession?.tokens?.idToken}`;
+        config.headers.Authorization = `Bearer ${authSession?.tokens?.idToken?.toString()}`;
         return config;
       },
     );

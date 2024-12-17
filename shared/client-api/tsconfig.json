@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "module": "CommonJS",
+    "target": "es5",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "lib": ["es2015"],
+    "rootDirs": ["./"],
+    "outDir": ".esbuild"
+  },
+  "include": ["../../shared/types", "."],
+  "watchOptions": {
+    "excludeDirectories": [
+      "node_modules",
+      ".esbuild",
+      ".dynamodb",
+      ".serverless",
+      "scripts"
+    ]
+  }
+}

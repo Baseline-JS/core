@@ -51,8 +51,12 @@ export class RequestHandler {
       config: AxiosRequestConfig,
     ) => Promise<AxiosRequestConfig>,
   ) {
-    this.authorizedConfig = authorizedConfig;
-    this.unauthorizedConfig = unauthorizedConfig;
+    if (authorizedConfig) {
+      this.authorizedConfig = authorizedConfig;
+    }
+    if (unauthorizedConfig) {
+      this.unauthorizedConfig = unauthorizedConfig;
+    }
   }
 
   public request = async <T>(

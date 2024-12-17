@@ -67,9 +67,11 @@ const UserSettings = (props: Props): JSX.Element => {
             <button
               disabled={!isEmailVerified}
               onClick={() => {
-                isChangingEmail
-                  ? void handleEmailChange()
-                  : setIsChangingEmail(true);
+                if (isChangingEmail) {
+                  void handleEmailChange();
+                } else {
+                  setIsChangingEmail(true);
+                }
               }}
             >
               {isChangingEmail ? 'Update' : 'Edit'}
