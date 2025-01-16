@@ -12,17 +12,16 @@ If you like BaselineJS give us a ⭐️
 [LinkedIn](https://www.linkedin.com/company/baselinejs) |
 [YouTube](https://www.youtube.com/@Baseline-JS)
 
-Startups, want $10k USD of AWS Credits to Get Started? [Apply Here](https://share.hsforms.com/1P6p_G9Q_Q-SJAESAYtLftgqm3as)
+Startups, want $1k USD of AWS Credits to Get Started? [Apply Here](https://share.hsforms.com/1P6p_G9Q_Q-SJAESAYtLftgqm3as)
 
 # Getting Started
-
-# Videos Walkthroughs
 
 Video walkthroughs setting up Baseline
 
 - [Baseline Demo](https://www.youtube.com/watch?v=db5gxYWAf1E)
 - [Baseline with Windows Subsystem Linux](https://www.youtube.com/watch?v=sxrQxoibUgI)
 - [Baseline with GitHub Codespaces](https://www.youtube.com/watch?v=uvL9PxdijXA)
+- [Baseline Simplified Workshop](https://youtu.be/YWh5iVaTq_w)
 
 # Setup
 
@@ -41,7 +40,7 @@ The quick start command will:
 
 You may need to install npm if npx is not available, you can do this by installing [Node.js](https://nodejs.org/en/download/)
 
-## Setup
+## Create App
 
 If you prefer a more manual setup, follow the steps below.
 
@@ -70,7 +69,7 @@ These must be installed before following the setup instructions. These can be in
     - Install on mac `brew install jq`
     - Install on Linux `sudo yum install jq` or `sudo apt-get install jq`, or other appropriate methods
   - Java Runtime Environment (JRE) version 8.x or newer, it is only required for [DynamoDB local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html)
-    - Install on mac `brew install java`
+    - Install on mac `brew install temurin`
     - Install on linux `sudo yum install java` or `sudo apt-get install openjdk-8-jdk`, or other appropriate methods
     - DynamoDB local will automatically install in the project when the api is started, java needs to installed before this occurs
   - curl which is used in some of the bash scripts, [curl install instructions](https://everything.curl.dev/get)
