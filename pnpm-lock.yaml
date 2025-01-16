@@ -118,8 +118,8 @@ importers:
         specifier: 3.39.0
         version: 3.39.0
       serverless-baseline-invalidate-cloudfront:
-        specifier: 0.1.1
-        version: 0.1.1
+        specifier: 0.1.2
+        version: 0.1.2
       serverless-s3-sync:
         specifier: 3.1.0
         version: 3.1.0(serverless@3.39.0)
@@ -282,8 +282,8 @@ importers:
         specifier: 3.39.0
         version: 3.39.0
       serverless-baseline-invalidate-cloudfront:
-        specifier: 0.1.1
-        version: 0.1.1
+        specifier: 0.1.2
+        version: 0.1.2
       serverless-s3-sync:
         specifier: 3.1.0
         version: 3.1.0(serverless@3.39.0)
@@ -4864,8 +4864,8 @@ packages:
     resolution: {integrity: sha512-VqpjJZKadQB/PEbEwvFdO43Ax5dFBZ2UECszz8bQ7pi7wt//PWe1P6MN7eCnjsatYtBT6EuiClbjSWP2WrIoTw==}
     engines: {node: '>= 0.8.0'}
 
-  serverless-baseline-invalidate-cloudfront@0.1.1:
-    resolution: {integrity: sha512-5MCyocTGi6QZMZJt9WfO2KhuWVH6PKzx5fBbk1ovVGRvG8sG+C3Muo/1WnGwKF4KuapU75mtHK1JPvs/eM5W0g==}
+  serverless-baseline-invalidate-cloudfront@0.1.2:
+    resolution: {integrity: sha512-GCMbunzY8Eg/BdfkuG5h/QhnsaQsSv0tmoycz1itc4yD3gWFYGYWQ2iLhRYwisz7jFGQXbNFpj6N8nKi65P6Rw==}
 
   serverless-dynamodb@0.2.50:
     resolution: {integrity: sha512-mb9x7sV2Sweih0fVBvD0K21003mVfDEEzuNd6fqRp6L4BV6vDctTzhfwkRj5XTaseSNE4E1zfZKD/6b64RlcEQ==}
@@ -12421,7 +12421,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  serverless-baseline-invalidate-cloudfront@0.1.1: {}
+  serverless-baseline-invalidate-cloudfront@0.1.2: {}
 
   serverless-dynamodb@0.2.50:
     dependencies:

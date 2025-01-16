@@ -46,7 +46,7 @@
     "prettier": "2.4.1",
     "sass": "1.43.4",
     "serverless": "3.39.0",
-    "serverless-baseline-invalidate-cloudfront": "0.1.1",
+    "serverless-baseline-invalidate-cloudfront": "0.1.2",
     "serverless-s3-sync": "3.1.0",
     "stylelint": "16.2.1",
     "stylelint-config-css-modules": "4.4.0",
