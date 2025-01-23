@@ -47,7 +47,7 @@
     "serverless-dynamodb": "0.2.50",
     "serverless-esbuild": "1.52.1",
     "serverless-offline": "13.8.2",
-    "stylelint": "16.2.1",
+    "stylelint": "16.13.2",
     "stylelint-order": "6.0.4",
     "typescript": "5.4.2"
   }
