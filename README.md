@@ -1,18 +1,17 @@
+> [!IMPORTANT]
+> **This repository is no longer actively maintained.** The full history remains available for reference, but no further updates, fixes, or support will be provided here.
+>
+> Want to get in touch with the team? **[Contact us at baselinejs.com/contact](https://baselinejs.com/contact)**
+
 ![1688515420018](https://github.com/Baseline-JS/core/assets/151841910/620fa869-4bca-418d-af2c-3a3f8b2d2719)
 
 # BaselineJS
 
 BaselineJS is an open-source, fullstack TypeScript, serverless first framework designed to make building cloud native applications easier. Our framework utilizes a combination of modern technologies, architectures and operational processes to help teams to efficiently build and deploy robust applications
 
-If you like BaselineJS give us a ⭐️
-
 [Website](https://baselinejs.com/) |
-[Documentation](https://docs.baselinejs.com/) |
-[Discord](https://discord.gg/beCj9VDeMm) |
-[LinkedIn](https://www.linkedin.com/company/baselinejs) |
-[YouTube](https://www.youtube.com/@Baseline-JS)
-
-Startups, want $1k USD of AWS Credits to Get Started? [Apply Here](https://share.hsforms.com/1P6p_G9Q_Q-SJAESAYtLftgqm3as)
+[Contact](https://baselinejs.com/contact) |
+[LinkedIn](https://www.linkedin.com/company/baselinejs)
 
 # Getting Started
 
